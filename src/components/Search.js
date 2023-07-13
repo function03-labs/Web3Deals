@@ -20,7 +20,7 @@ function Search() {
     { value: 'nfts', label: 'NFTs' },
     { value: 'infrastructure', label: 'Infrastructure' },
     { value: 'cefi', label: 'CeFi' },
-    { value: 'other', label: 'Other' },
+    { value: 'others', label: 'Others' },
   ];
 
   const roundOptions = [
@@ -119,13 +119,13 @@ function Search() {
   };
   
   return (
-    <div className="flex flex-col items-center space-y-2 px-[8rem] m-auto py-3 ">
-      <form onSubmit={(e) => e.preventDefault()} className="text-m border-[1px] border-black mx-7 mr-3 flex w-64 item-center h-[34px] cursor-pointer  text-black">
+    <div className="flex flex-col items-center space-y-2 px-[8rem] m-auto py-4 pb-8 ">
+      {/**<form onSubmit={(e) => e.preventDefault()} className="text-m border-[1px] border-black mx-7 mr-3 flex w-64 item-center h-[34px] cursor-pointer  text-black">
         <input onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search for a project" value={searchTerm} type="text" className="p-2 w-full flex-grow focus:outline-none "/>
         <button type="submit" className='bg-blue-400'>
           <SearchIcon className="hover:text-white h-full p-[7px] focus:outline-none active:text-black"/>
         </button>
-      </form>
+      </form> */}
       <div className="space-x-3 hidden sm:flex flex-row">
         <Select
           styles={customStyles}
