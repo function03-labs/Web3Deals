@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Header from '../components/Header';
 import Footer from "@/components/Footer";
+import Search from "@/components/Search";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       </Head>
       <div>
         <Header />
+        <Search />
         <Footer />
       </div>
     </div>
