@@ -1,15 +1,28 @@
-import { useState } from 'react';
-import { SearchIcon } from '@heroicons/react/outline';
+import { useState,useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Select from 'react-select';
 
 function Search() {
   const Router = useRouter();
-  const [searchTerm, setSearchTerm] = useState('');
-  const [category, setCategory] = useState(null);
-  const [round, setRound] = useState(null);
-  const [amount, setAmount] = useState(null);
-  const [date, setDate] = useState(null);
+    // Define initial states for each filter based on router query
+    const initCategory = Router.query.cat ? { value: Router.query.cat, label: Router.query.cat.charAt(0).toUpperCase() + Router.query.cat.slice(1) } : null;
+    const initRound = Router.query.stage ? { value: Router.query.stage, label: Router.query.stage.charAt(0).toUpperCase() + Router.query.stage.slice(1) } : null;
+    const initAmount = Router.query.amount ? { value: Router.query.amount, label: Router.query.amount.charAt(0).toUpperCase() + Router.query.amount.slice(1) } : null;
+    const initDate = Router.query.date ? { value: Router.query.date, label: Router.query.date } : null;
+
+   // Use these initial states to initialize your state
+   const [category, setCategory] = useState(initCategory);
+   const [round, setRound] = useState(initRound);
+   const [amount, setAmount] = useState(initAmount);
+   const [date, setDate] = useState(initDate);
+
+     // Update the state when the router query changes
+  useEffect(() => {
+    setCategory(initCategory);
+    setRound(initRound);
+    setAmount(initAmount);
+    setDate(initDate);
+  }, [Router.query]);
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({length: 10}, (_, i) => ({ value: currentYear - i, label: String(currentYear - i) }));

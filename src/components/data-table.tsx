@@ -36,11 +36,17 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  pageIndex: number
+  setPageIndex: (pageIndex: number) => void
+  pageCount: number
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  pageIndex,
+  setPageIndex,
+  pageCount,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -69,15 +75,14 @@ export function DataTable<TData, TValue>({
   React.useEffect(() => {
     table.setPageSize(20);
   }, []);
-
   return (
     <div>
            <div className="flex items-center py-4">
         <Input
-          placeholder="Filter projects..."
-          value={(table.getColumn("project")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter by investors..."
+          value={(table.getColumn("investors")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("project")?.setFilterValue(event.target.value)
+            table.getColumn("investors")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -155,26 +160,31 @@ export function DataTable<TData, TValue>({
         </TableBody>
       </Table>
     </div>
-    <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          className="w-20"
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          className="w-20"
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
-      </div>
+    <div className="flex items-center justify-between py-4">
+  <div className="flex-grow">
+    <p>Page {pageIndex+1} of {pageCount}</p>
+  </div>
+  <div className="flex items-center space-x-2">
+    <Button
+      className="w-20"
+      variant="outline"
+      size="sm"
+      onClick={() => setPageIndex(pageIndex - 1)}
+      disabled={pageIndex === 0}
+    >
+      Previous
+    </Button>
+    <Button
+      className="w-20"
+      variant="outline"
+      size="sm"
+      onClick={() => setPageIndex(pageIndex + 1)}
+      disabled={pageIndex >= pageCount - 1}
+    >
+      Next
+    </Button>
+  </div>
+</div>
     </div>
   )
 }

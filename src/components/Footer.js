@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 function Footer() {
     const Router = useRouter();
     return (
-      <footer className="py-2 sm:py-4 md:py-6 px-[8rem] w-full absolute bottom-0 border-t-2 border-[#F2F2F2]">
+      <footer className="h-4 sm:py-4 md:py-6 px-[8rem] w-full relative bottom-0 border-t-2 border-[#F2F2F2]">
         <button onClick={() => {window.scrollTo({ top: 0, behavior: 'smooth' });}} className="absolute -top-12 right-6 z-10 w-min md:mt-0 text-[#BDBDBD] hover:text-black focus:outline-none">
             <ChevronDoubleUpIcon className="h-9"/>
         </button>
@@ -19,7 +19,7 @@ function Footer() {
           </div>
           <div className="mt-4 md:mt-0 flex space-x-8 md:space-x-12 tracking-wide">
            <div>
-                <h2 className="font-semibold">About Web3Deals</h2>
+                <h2 className="font-semibold mb-1">About Web3Deals</h2>
                 <ul className="flex flex-col space-y-1">
                     <li>
                         <p onClick={() => Router.push("/help#terms-of-service")} className="text-[#BDBDBD] cursor-pointer hover:underline hover:text-black">Terms of Service</p>
@@ -33,7 +33,7 @@ function Footer() {
                 </ul>
             </div>
             <div> 
-                <h2 className="font-semibold">Social Media</h2>
+                <h2 className="font-semibold mb-1">Social Media</h2>
                 <ul className="flex flex-col space-y-1">
                     <li>
                         <a href="" className="text-[#BDBDBD] hover:underline hover:text-black">Facebook</a>
@@ -47,7 +47,7 @@ function Footer() {
                 </ul>
             </div>
             <div> 
-                <h2 className="font-semibold">Support Us</h2>
+                <h2 className="font-semibold mb-1">Support Us</h2>
                 <ul className="flex flex-col space-y-1">
                     <li>
                         <a href="" className="text-[#BDBDBD] hover:underline hover:text-black">Donate</a>

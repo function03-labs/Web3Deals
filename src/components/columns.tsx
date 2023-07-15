@@ -42,8 +42,13 @@ export const columns: ColumnDef<Project>[] = [
       )
     },
     cell: ({ row }) => {
-      return <div className="text-left font-medium">{row.getValue("project")}</div>
-    },
+      return (
+        <div className="flex items-center">
+          <img src={`https://s1.coincarp.com/${row.original.logo}`} className="w-6 h-46 rounded mr-2" />
+          <span className="text-left font-medium">{row.getValue("project")}</span>
+        </div>
+      );},
+    
   },
   {
     accessorKey: "categories",
