@@ -96,7 +96,7 @@ export const columns: ColumnDef<Project>[] = [
     },
     cell: ({ row }) => {
       
-      return <div className=" text-start font-medium">{row.getValue("amount") ? '$'+(parseInt(row.getValue("amount")) / 1000000).toFixed(2).replace('.', ',') + 'M': '--'}</div>
+      return <div className=" text-start font-medium">{row.getValue("amount") ? '$'+(parseInt(row.getValue("amount")) / 1000000).toFixed(2) + 'M': '--'}</div>
     },
   },
   {
