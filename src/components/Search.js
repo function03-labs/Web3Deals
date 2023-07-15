@@ -49,20 +49,28 @@ function Search() {
     control: (base, state) => ({
       ...base,
       border: 'none',
-      borderBottom : state.isFocused ? '1.5px solid blue' : '1.5px solid black',
+      border : state.isFocused ? '1.5px solid black' : '1.5px solid lightgray',
       boxShadow: 'none',
       borderRadius: 0,
+      minWidth: '100px',
+      overflow:'hidden',
+      whiteSpace: 'nowrap',
       '&:hover': {
-        borderBottom: '1.5px solid blue'
+        cursor: 'pointer'
       }
     }),
     option: (base, { isFocused, isSelected }) => ({
       ...base,
-      background: isFocused ? 'navytail' : isSelected ? 'gray' : 'white',
+      fontSize: '0.875rem',
+      cursor: 'pointer',
+      background: isSelected ? 'lightgray' : 'white',
       whiteSpace: 'nowrap',
     }),
     menu: base => ({
         ...base,
+        boxShadow: '-9px 11px 13px -9px rgba(0,0,0,0.16)',
+        padding : '0.25rem',
+        borderRadius: 'none',
         width: 'auto',  // set width to auto to match width of longest option
       }),
     singleValue: base => ({
@@ -119,7 +127,7 @@ function Search() {
   };
   
   return (
-    <div className="flex flex-col items-center space-y-2 px-[8rem] m-auto py-4 pb-8 ">
+    <div className="flex flex-col items-center space-y-2 mx-12 ">
       {/**<form onSubmit={(e) => e.preventDefault()} className="text-m border-[1px] border-black mx-7 mr-3 flex w-64 item-center h-[34px] cursor-pointer  text-black">
         <input onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search for a project" value={searchTerm} type="text" className="p-2 w-full flex-grow focus:outline-none "/>
         <button type="submit" className='bg-blue-400'>

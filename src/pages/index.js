@@ -1,8 +1,8 @@
 import Head from "next/head";
+import DemoPage from '@/components/rayen';
 import Header from '@/components/Header';
 import Footer from "@/components/Footer";
 import Search from "@/components/Search";
-import Table from "@/components/Table";
 
 export default function Home() {
   return (
@@ -12,9 +12,8 @@ export default function Home() {
       </Head>
       <div className="relative">
         <Header />
-        <Search />
         <div className="px-32 pb-64">
-        <Table />
+          <DemoPage />
         </div>
         <Footer />
       </div>
