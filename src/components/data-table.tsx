@@ -73,11 +73,11 @@ export function DataTable<TData, TValue>({
   })
 
   React.useEffect(() => {
-    table.setPageSize(20);
+    table.setPageSize(40);
   }, []);
   return (
     <div>
-           <div className="flex items-center py-4">
+           <div className="flex items-center pb-3">
         <Input
           placeholder="Filter by investors..."
           value={(table.getColumn("investors")?.getFilterValue() as string) ?? ""}
@@ -160,7 +160,7 @@ export function DataTable<TData, TValue>({
         </TableBody>
       </Table>
     </div>
-    <div className="flex items-center justify-between py-4">
+    <div className="flex items-center justify-between pt-3">
   <div className="flex-grow">
     <p>Page {pageIndex+1} of {pageCount}</p>
   </div>

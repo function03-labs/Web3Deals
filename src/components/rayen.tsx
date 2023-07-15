@@ -4,37 +4,30 @@ import { DataTable } from "./data-table"
 import { useRouter } from "next/router";
 import { isEqual } from "lodash";
 
-const ITEMS_PER_PAGE = 20; // Define how many items per page you want
+const ITEMS_PER_PAGE = 40; // Define how many items you want to fetch per API call
 
 async function getData(query, pageIndex = 0): Promise<{ projects: Project[], total_pages: number }> {
-  const { cat, amount, stage, date } = query;
-  const start = pageIndex * ITEMS_PER_PAGE;
+  const start = pageIndex * ITEMS_PER_PAGE; // adjust start to fetch two "pages" at once
   
-  let apiUrl = `https://sapi.coincarp.com/api/v1/market/fundraising/list?lang=en-US&start=${start}`;
+  // define a helper function to make a request with a given start index
+  async function fetchPage(startIndex) {
+    let apiUrl = `https://sapi.coincarp.com/api/v1/market/fundraising/list?lang=en-US&start=${startIndex}`;
+    if (query.cat) apiUrl += `&cat=${query.cat}`;
+    if (query.amount) apiUrl += `&amount=${query.amount}`;
+    if (query.stage) apiUrl += `&stage=${query.stage}`;
+    if (query.date) apiUrl += `&date=${query.date}`;
+
+    const response = await fetch(apiUrl);
+    return await response.json();
+  }
+
+  // fetch two "pages" of data
+  const responses = await Promise.all([fetchPage(start), fetchPage(start + ITEMS_PER_PAGE/2)]);
   
-  if (cat) {
-    apiUrl += `&cat=${cat}`;
-  }
-  if (amount) {
-    apiUrl += `&amount=${amount}`;
-      }
-  if (stage) {
-    apiUrl += `&stage=${stage}`;
-
-  }
-  if (date) {
-    apiUrl += `&date=${date}`;
-
-  }
-
-  const response = await fetch(apiUrl);
-  const data = await response.json();
-
-  let projects: Project[] = [];
-  // Process data
-  if (data && data.data && data.data.list) {
-    projects = data.data.list.map((project) => {
-      return {
+  // combine the project data from both responses
+  const allProjects = responses.flatMap(response => {
+    if (response && response.data && response.data.list) {
+      return response.data.list.map((project) => ({
         id: project.projectcode,
         amount: project.fundamount,
         project: project.projectname,
@@ -42,14 +35,16 @@ async function getData(query, pageIndex = 0): Promise<{ projects: Project[], tot
         stage: project.fundstagename,
         categories: project.categorylist.map(category => category.name).join(', '),
         investors: project.investorlist.map(investor => investor.investorname).join(', ')
-      };
-    });
-  }
-  console.log(projects)
-  // Assume API gives you total count, calculate total pages
-  const total_pages = Math.ceil(data.recordsfiltered / ITEMS_PER_PAGE);
+      }));
+    } else {
+      return [];
+    }
+  });
 
-  return { projects, total_pages };
+  // for total_pages, use the total count from the first response
+  const total_pages = Math.ceil(responses[0].recordsfiltered / (ITEMS_PER_PAGE ));
+  console.log(allProjects);
+  return { projects: allProjects, total_pages };
 }
 
 export default function DemoPage() {
@@ -78,7 +73,7 @@ export default function DemoPage() {
   }, [router.query, pageIndex, isQueryChanged]);
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto py-6">
       {loading ? (
   <div>Loading...</div>
 ) : (

@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 function Footer() {
     const Router = useRouter();
     return (
-      <footer className="h-4 sm:py-4 md:py-6 px-[8rem] w-full relative bottom-0 border-t-2 border-[#F2F2F2]">
+      <footer className="sm:py-4 md:py-6 px-[8rem] w-full relative border-t-2 border-[#F2F2F2]">
         <button onClick={() => {window.scrollTo({ top: 0, behavior: 'smooth' });}} className="absolute -top-12 right-6 z-10 w-min md:mt-0 text-[#BDBDBD] hover:text-black focus:outline-none">
             <ChevronDoubleUpIcon className="h-9"/>
         </button>

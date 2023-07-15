@@ -11,7 +11,7 @@ export default function Home() {
       </Head>
       <div className="relative">
         <Header />
-        <div className="px-32 pb-64">
+        <div className="px-32">
           <DemoPage />
         </div>
         <Footer />
