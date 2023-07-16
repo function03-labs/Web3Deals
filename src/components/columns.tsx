@@ -20,6 +20,8 @@ export type Project = {
   amount: number
   project: string
   logo: string
+  date : number
+  count : number
   stage: string
   categories: "DeFi" | "CeFi" | "Web3" | "Others" | "NFTs" | "Infrastructure"
   investors: string
@@ -29,18 +31,7 @@ export type Project = {
 export const columns: ColumnDef<Project>[] = [
   {
     accessorKey: "project",
-    header: ({ column }) => {
-      return (
-        <Button
-          className="px-0"
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Project
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
+    header: "Project",
     cell: ({ row }) => {
       return (
         <div className="flex items-center">
@@ -52,33 +43,11 @@ export const columns: ColumnDef<Project>[] = [
   },
   {
     accessorKey: "categories",
-    header: ({ column }) => {
-      return (
-        <Button
-          className="px-0"
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Categories
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
+    header: "Categories",
   },
   {
     accessorKey: "stage",
-    header: ({ column }) => {
-      return (
-        <Button
-        className="px-0"
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Funding Round
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
+    header: "Funding Round",
   },
   {
     accessorKey: "amount",
@@ -100,8 +69,34 @@ export const columns: ColumnDef<Project>[] = [
     },
   },
   {
+    accessorKey: "count",
+    header: "Investors Count",
+  },
+  {
     accessorKey: "investors",
-    header: "Investor Names",
+    header: "Main Investors",
+  },
+  {
+    accessorKey: "date",
+    header: ({ column }) => (
+      <Button
+        className="px-0"
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Fund Date
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
+    cell: ({ row }) => {
+      const timestamp : number = row.getValue("date");
+      const date = new Date(timestamp * 1000);
+      return <div>{date.toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      })}</div>;
+    },
   },
   {
     id: "actions",

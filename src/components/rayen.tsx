@@ -31,6 +31,8 @@ async function getData(query, pageIndex = 0): Promise<{ projects: Project[], tot
         id: project.projectcode,
         amount: project.fundamount,
         project: project.projectname,
+        date: project.funddate,
+        count: project.investorcount,
         logo: project.logo,
         stage: project.fundstagename,
         categories: project.categorylist.map(category => category.name).join(', '),

@@ -7,7 +7,20 @@ function Search() {
     // Define initial states for each filter based on router query
     const initCategory = Router.query.cat ? { value: Router.query.cat, label: Router.query.cat.charAt(0).toUpperCase() + Router.query.cat.slice(1) } : null;
     const initRound = Router.query.stage ? { value: Router.query.stage, label: Router.query.stage.charAt(0).toUpperCase() + Router.query.stage.slice(1) } : null;
-    const initAmount = Router.query.amount ? { value: Router.query.amount, label: Router.query.amount.charAt(0).toUpperCase() + Router.query.amount.slice(1) } : null;
+    const mapAmountQueryParamToOption = (queryParam) => {
+      const mapping = {
+        'range-a': 'Less than $1M',
+        'range-b': '$1M - $5M',
+        'range-c': '$5M - $10M',
+        'range-d': '$10M - $50M',
+        'range-e': '$50M - $100M',
+        'range-f': 'More than $100M',
+      };
+    
+      return { value: queryParam, label: mapping[queryParam] };
+    };
+    
+    const initAmount = Router.query.amount ? mapAmountQueryParamToOption(Router.query.amount) : null;
     const initDate = Router.query.date ? { value: Router.query.date, label: Router.query.date } : null;
 
    // Use these initial states to initialize your state
