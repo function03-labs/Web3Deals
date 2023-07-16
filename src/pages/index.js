@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import CardFeed from '@/components/CardFeed';
 
 const data = [
-  { title: 'Total Revenue', icon: <svg
+  { title: 'Funding Rounds', icon: <svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 24 24"
   fill="none"
@@ -17,7 +17,7 @@ const data = [
 >
   <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
 </svg>, stat: '$45,231.89', description: '+20.1% from last month' },
-  { title: 'Subscriptions', icon: <svg
+  { title: 'Total Funding Amount', icon: <svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 24 24"
   fill="none"
@@ -31,7 +31,7 @@ const data = [
   <circle cx="9" cy="7" r="4" />
   <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
 </svg>, stat: '+2350', description: '+180.1% from last month' },
-  { title: 'Sales', icon: <svg
+  { title: 'Biggest Funding Round Weekly', icon: <svg
   xmlns="http://www.w3.org/2000/svg"
   viewBox="0 0 24 24"
   fill="none"
