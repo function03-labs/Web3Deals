@@ -153,48 +153,44 @@ function Search() {
   };
   
   return (
-    <div className="flex flex-col items-center space-y-2 mx-12 ">
-      {/**<form onSubmit={(e) => e.preventDefault()} className="text-m border-[1px] border-black mx-7 mr-3 flex w-64 item-center h-[34px] cursor-pointer  text-black">
-        <input onChange={(e) => setSearchTerm(e.target.value)} placeholder="Search for a project" value={searchTerm} type="text" className="p-2 w-full flex-grow focus:outline-none "/>
-        <button type="submit" className='bg-blue-400'>
-          <SearchIcon className="hover:text-white h-full p-[7px] focus:outline-none active:text-black"/>
-        </button>
-      </form> */}
-      <div className="space-x-3 hidden sm:flex flex-row">
-        <Select
-          styles={customStyles}
-          options={categoryOptions}
-          value={category}
-          onChange={handleCategoryChange}
-          isClearable
-          placeholder="Category"
-        />
-        <Select
-          styles={customStyles}
-          options={roundOptions}
-          value={round}
-          onChange={handleRoundChange}
-          isClearable
-          placeholder="Funding Round"
-        />
-        <Select
-          styles={customStyles}
-          options={amountOptions}
-          value={amount}
-          onChange={handleAmountChange}
-          isClearable
-          placeholder="Amount"
-        />
-        <Select
-          styles={customStyles}
-          options={years}
-          value={date}
-          onChange={handleDateChange}
-          isClearable
-          placeholder="Year"
-        />
-      </div>
-    </div>
+    <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-3 md:mx-8 mt-2 md:mt-0">
+    <Select
+      styles={customStyles}
+      options={categoryOptions}
+      value={category}
+      onChange={handleCategoryChange}
+      isClearable
+      placeholder="Category"
+      className="w-full sm:w-auto"
+    />
+    <Select
+      styles={customStyles}
+      options={roundOptions}
+      value={round}
+      onChange={handleRoundChange}
+      isClearable
+      placeholder="Funding Round"
+      className="w-full sm:w-auto"
+    />
+    <Select
+      styles={customStyles}
+      options={amountOptions}
+      value={amount}
+      onChange={handleAmountChange}
+      isClearable
+      placeholder="Amount"
+      className="w-full sm:block hidden md:block sm:w-auto"
+    />
+    <Select
+      styles={customStyles}
+      options={years}
+      value={date}
+      onChange={handleDateChange}
+      isClearable
+      placeholder="Year"
+      className="w-full sm:block hidden md:block sm:w-auto"
+    />
+  </div>
   );
 }
 
