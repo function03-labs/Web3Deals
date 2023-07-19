@@ -7,7 +7,7 @@ import CardFeed from '@/components/CardFeed';
 
 async function fetchStats() {
   try {
-    const res = await fetch('http://localhost:3000/api/stats');
+    const res = await fetch('/api/stats');
 
     // Check if the request was successful
     if (!res.ok) {

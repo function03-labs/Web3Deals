@@ -13,7 +13,7 @@ async function getData(query, pageIndex = 0): Promise<{ projects: Project[], tot
   const sortOrder = sortParts[1];
   // define a helper function to make a request with a given start index
   async function fetchPage(startIndex) {
-    let apiUrl = `http://localhost:3000/api/data?start=${startIndex+1}`;
+    let apiUrl = `/api/data?start=${startIndex+1}`;
     if (query.cat) apiUrl += `&category=${query.cat}`;
     if (query.amount) apiUrl += `&fundRange=${query.amount}`;
     if (query.stage) apiUrl += `&fundstagename=${query.stage}`;
