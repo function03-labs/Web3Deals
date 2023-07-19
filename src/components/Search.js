@@ -50,16 +50,16 @@ function Search() {
   ];
 
   const roundOptions = [
-    { value: 'pre-seed', label: 'Pre-seed' },
-    { value: 'seed', label: 'Seed' },
-    { value: 'series-a', label: 'Series A' },
-    { value: 'series-b', label: 'Series B' },
-    { value: 'series-c', label: 'Series C' },
-    { value: 'ico', label: 'ICO' },
-    { value: 'ipo', label: 'IPO' },
-    { value: 'crowdfunding', label: 'Crowdfunding' },
-    { value: 'community-raise', label: 'Community Raise' },
-    { value: 'undisclosed', label: 'Undisclosed' },
+    { value: 'Pre-seed', label: 'Pre-seed' },
+    { value: 'Seed', label: 'Seed' },
+    { value: 'Series-a', label: 'Series A' },
+    { value: 'Series-b', label: 'Series B' },
+    { value: 'Series-c', label: 'Series C' },
+    { value: 'Ico', label: 'ICO' },
+    { value: 'Ipo', label: 'IPO' },
+    { value: 'Crowdfunding', label: 'Crowdfunding' },
+    { value: 'Community-raise', label: 'Community Raise' },
+    { value: 'Undisclosed', label: 'Undisclosed' },
   ];
 
   const amountOptions = [
