@@ -15,7 +15,7 @@ export default function Home() {
       <div className="relative">
         <Header theme={theme} setTheme={setTheme} />
         <div className="lg:px-32 md:px-26 sm:px-12">
-          <CardFeed />
+          <CardFeed theme={theme} />
           <DemoPage theme={theme} />
         </div>
         <Footer />

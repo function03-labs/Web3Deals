@@ -153,12 +153,12 @@ const updateSearchValue = (value: string) => {
   
   return (
     <div>
-  <div className="flex flex-wrap items-center py-3">
+  <div className="flex flex-wrap items-center pb-3">
     <div className="w-full sm:w-auto mb-2 sm:mb-0">
       <Input
         placeholder="Search for a project"
         value={(table.getColumn("project")?.getFilterValue() as string) ?? ""}
-        className="border-2 border-gray-200 p-2 rounded"
+        className={theme ==='light' ? "border-2 text-gray-500 border-gray-200 p-2":"border-2 border-gray-400 text-gray-400 p-2" }
         onChange={(event) =>
           updateSearchValue(event.target.value)
         }
@@ -170,7 +170,7 @@ const updateSearchValue = (value: string) => {
     <div className="ml-auto">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="ml-auto hidden xl:block text-gray-500 border-gray-200">
+          <Button variant="outline" className="ml-auto hidden xl:block text-gray-400 border-gray-200">
             Columns
           </Button>
         </DropdownMenuTrigger>

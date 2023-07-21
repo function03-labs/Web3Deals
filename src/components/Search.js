@@ -85,6 +85,7 @@ function Search({theme}) {
       },
       backgroundColor: theme === 'dark' ? 'black' : 'white',
       textColor: theme === 'dark' ? 'white' : 'black',
+      fontSize: '0.875rem',
       transition: 'background-color 0.5s, color 0.5s', // Added transition
     }),
     option: (base, { isFocused, isSelected }) => ({

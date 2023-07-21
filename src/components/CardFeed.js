@@ -1,16 +1,22 @@
 import { useState,useEffect} from 'react';
 import Card from '@/components/Card';
+import Select from 'react-select';
 
 async function fetchStats(timeframe) {
-  const res = await fetch(`/api/stats?timeframe=${timeframe}`);
+  const res = await fetch(`/api/stats?timeframe=${timeframe.value}`);
   if (!res.ok) {
     throw new Error(`The server responded with an error: ${res.status}`);
   }
   return await res.json();
 }
 
-const CardFeed = () => {
-  const [timeframe, setTimeframe] = useState('month');
+const Options = [
+  { value: 'week', label: 'This Week' },
+  { value: 'month', label: 'This Month' },
+  { value: 'year', label: 'This Year' }]
+
+const CardFeed = ({theme}) => {
+  const [timeframe, setTimeframe] = useState(Options[0]);
   const [stats, setStats] = useState([]); 
   useEffect(() => {
     fetchStats(timeframe) 
@@ -55,18 +61,66 @@ const CardFeed = () => {
   }, [timeframe]);
 
 
-  const handleTimeframeChange = (event) => {
-    setTimeframe(event.target.value);
-    
+  const handleTimeframeChange = (e) => {
+    setTimeframe(e);
+  };
+
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      border: state.isFocused ?  (theme === 'dark' ? '1.5px solid white' : '1.5px solid black')  : '1.5px solid lightgray',
+      boxShadow: 'none',
+      borderRadius: 0,
+      Width:'100px',
+      minWidth: '100px',
+      overflow:'hidden',
+      whiteSpace: 'nowrap',
+      '&:hover': {
+        cursor: 'pointer'
+      },
+      backgroundColor: theme === 'dark' ? 'black' : 'white',
+      textColor: theme === 'dark' ? 'white' : 'black',
+      fontSize: '0.875rem',
+      transition: 'background-color 0.5s, color 0.5s', // Added transition
+    }),
+    option: (base, { isFocused, isSelected }) => ({
+      ...base,
+      fontSize: '0.875rem',
+      cursor: 'pointer',
+      backgroundColor: isSelected ? (theme === 'dark' ? 'darkgray' : 'lightgray') : (theme === 'dark' ? 'black' : 'white'),
+      color: theme === 'dark' ? 'white' : 'black',
+      whiteSpace: 'nowrap',
+      transition: 'background-color 0.5s, color 0.5s', // Added transition
+    }),
+    menu: base => ({
+      ...base,
+      boxShadow: theme === 'dark' ? '-9px 11px 13px -9px rgba(0,0,0,0.5)' : '-9px 11px 13px -9px rgba(0,0,0,0.16)',
+      padding : '0.25rem',
+      borderRadius: 'none',
+      width: 'auto',  // set width to auto to match width of longest option
+      backgroundColor: theme === 'dark' ? 'black' : 'white',
+      color: theme === 'dark' ? 'white' : 'black',
+      transition: 'background-color 0.5s, color 0.5s, box-shadow 0.5s', // Added transition
+    }),
+    singleValue: base => ({
+      ...base,
+      color: theme === 'dark' ? 'white' : 'black',
+      transition: 'color 0.5s', // Added transition
+    }),
+    indicatorSeparator: () => ({
+      display: 'none'
+    }),
   };
 
   return (
-    <div className=" mt-5 space-y-4 mx-12">
-      <select value={timeframe} onChange={handleTimeframeChange} className="p-2 border select-theme border-gray-300 focus:outline-none">
-        <option value="year">This Year</option>
-        <option value="month">This Month</option>
-        <option value="week">This Week</option>
-      </select>
+    <div className=" mt-5 space-y-4 mx-8">
+      <Select
+      styles={customStyles}
+      options={Options}
+      value={timeframe}
+      onChange={handleTimeframeChange}
+      placeholder="This Week"
+    />
       <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
         {stats.map((cardData,index) => (
             <Card
@@ -75,7 +129,7 @@ const CardFeed = () => {
               icon={cardData.icon}
               mainStat={cardData.mainStat}
               comparisonStat={cardData.comparisonStat}
-              subStat={cardData.subStat}
+              theme={theme}
             />
         ))}
       </div>
