@@ -71,6 +71,18 @@ export const columns: ColumnDef<Project>[] = [
   {
     accessorKey: "investors",
     header: "Main Investors",
+    cell: ({ row }) => {
+      
+      return (
+        <div>
+          {row.getValue("investors") ? row.getValue("investors")+
+            ((row.original.count - (row.getValue("investors") as string).split(',').length > 0) ? 
+              ' +' + (row.original.count - (row.getValue("investors")as string).split(',').length) 
+              : '') 
+          : '--'}
+        </div>
+      );
+    },
   },
   {
     accessorKey: "date",
