@@ -13,7 +13,6 @@ export default async function handler(req, res) {
       const category = req.query.category || "";
       const fundRange = req.query.fundRange || "";
       const year = req.query.year;
-      console.log(year)
       const projectname = req.query.projectname || "";
       const sortField = req.query.sortField || "funddate";
       const sortOrder = req.query.sortOrder === "desc" ? 1 : -1;
