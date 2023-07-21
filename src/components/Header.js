@@ -27,7 +27,7 @@ function Header() {
 
     return (
         <header className="z-20 ease-linear  flex flex-col md:flex-row justify-between items-center py-2 sm:py-3 md:py-3 lg:px-[12rem] md:px-[8rem] border-b-2 border-[#F2F2F2]">
-            <Image src={theme==='light' ? "/Assets/logo2.png" : "/Assets/logo1.png"} alt="Logo" width={160} height={40} style={{ objectFit: 'contain' }} className="cursor-pointer" />
+            <Image src={theme==='light' ? "/assets/logo2.png" : "/assets/logo1.png"} alt="Logo" width={160} height={40} style={{ objectFit: 'contain' }} />
             <nav class="hidden items-center space-x-2 pt-1  lg:flex">
               
               <a target="_blank" rel="noreferrer" href="https://github.com/function03-labs/Web3Deals">
