@@ -119,7 +119,7 @@ export const columns: ColumnDef<Project>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-white">
+          <DropdownMenuContent align="end" className="mytheme">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem className="cursor-pointer"
               onClick={() => navigator.clipboard.writeText(payment.project)}

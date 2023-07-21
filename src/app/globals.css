@@ -19,6 +19,11 @@
   --color-text: #ffffff;
 }
 
+.mytheme {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: all .5s ease;
+}
 body, select {
   background-color: var(--color-bg);
   color: var(--color-text);

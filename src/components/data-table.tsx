@@ -174,7 +174,7 @@ const updateSearchValue = (value: string) => {
             Columns
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="bg-white border-gray-200">
+        <DropdownMenuContent align="end" className="mytheme border-gray-200">
           {table
             .getAllColumns()
             .filter(
