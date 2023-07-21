@@ -61,7 +61,7 @@ const CardFeed = () => {
   };
 
   return (
-    <div className=" mt-10 space-y-4 mx-12">
+    <div className=" mt-5 space-y-4 mx-12">
       <select value={timeframe} onChange={handleTimeframeChange} className="p-2 border select-theme border-gray-300 focus:outline-none">
         <option value="year">This Year</option>
         <option value="month">This Month</option>

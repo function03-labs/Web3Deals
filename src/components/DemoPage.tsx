@@ -58,7 +58,7 @@ const allProjects = responses.flatMap(response => {
   return { projects: allProjects, total_pages };
 }
 
-export default function DemoPage() {
+export default function DemoPage({theme}) {
   const router = useRouter();
   const [data, setData] = useState<Project[]>([]);
   const [pageIndex, setPageIndex] = useState(0); // Add state for page index
@@ -94,7 +94,7 @@ useEffect(() => {
       {loading ? (
   <div>Loading...</div>
 ) : (
-      <DataTable columns={columns} data={data} pageIndex={pageIndex} setPageIndex={setPageIndex} pageCount={pageCount} />
+      <DataTable columns={columns} data={data} pageIndex={pageIndex} setPageIndex={setPageIndex} pageCount={pageCount} theme={theme} />
  )} </div>
   )
 }

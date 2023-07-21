@@ -39,6 +39,7 @@ interface DataTableProps<TData, TValue> {
   pageIndex: number
   setPageIndex: (pageIndex: number) => void
   pageCount: number
+  theme : string
 }
 
 export function DataTable<TData, TValue>({
@@ -47,6 +48,7 @@ export function DataTable<TData, TValue>({
   pageIndex,
   setPageIndex,
   pageCount,
+  theme
 }: DataTableProps<TData, TValue>) {
   const router = useRouter()
   const pathname = usePathname()
@@ -163,7 +165,7 @@ const updateSearchValue = (value: string) => {
       />
     </div>
     <div className="flex-grow sm:flex-grow-0">
-      <Search  />
+      <Search theme={theme}  />
     </div>
     <div className="ml-auto">
       <DropdownMenu>

@@ -5,6 +5,7 @@
 * {
   font-family: outfit;
 }
+
 :root {
   --transition-time: 0.5s;
 }
@@ -18,12 +19,7 @@
   --color-text: #ffffff;
 }
 
-.select-theme {
-  background-color: var(--select-bg);
-  color: var(--select-color);
-}
-
-body {
+body, select {
   background-color: var(--color-bg);
   color: var(--color-text);
   transition: all .5s ease;

@@ -1,12 +1,9 @@
 import { useState,useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Select from 'react-select';
-import useTheme from '@/components/useTheme';
 
-function Search() {
+function Search({theme}) {
   const Router = useRouter();
-  const [theme] = useTheme();
-  const [customStyles, setCustomStyles] = useState({});
     // Define initial states for each filter based on router query
     const initCategory = Router.query.cat ? { value: Router.query.cat, label: Router.query.cat.charAt(0).toUpperCase() + Router.query.cat.slice(1) } : null;
     const initRound = Router.query.stage ? { value: Router.query.stage, label: Router.query.stage.charAt(0).toUpperCase() + Router.query.stage.slice(1) } : null;
@@ -74,46 +71,46 @@ function Search() {
     { value: 'range-f', label: 'More than $100M' },
   ];
 
-  useEffect(() => {
-    setCustomStyles({
-      control: (base, state) => ({
-        ...base,
-        border: 'none',
-        border : state.isFocused ? '1.5px solid black' : '1.5px solid lightgray',
-        boxShadow: 'none',
-        borderRadius: 0,
-        minWidth: '100px',
-        overflow:'hidden',
-        whiteSpace: 'nowrap',
-        '&:hover': {
-          cursor: 'pointer'
-        },
-        background: theme === 'dark' ? '#000' : '#fff', 
-        color: theme === 'dark' ? '#fff' : '#000' 
-      }),
-      option: (base, { isFocused, isSelected }) => ({
-        ...base,
-        fontSize: '0.875rem',
-        cursor: 'pointer',
-        background: isSelected ? 'lightgray' : 'white',
-        whiteSpace: 'nowrap',
-      }),
-      menu: base => ({
-          ...base,
-          boxShadow: '-9px 11px 13px -9px rgba(0,0,0,0.16)',
-          padding : '0.25rem',
-          borderRadius: 'none',
-          width: 'auto', 
-        }),
-      singleValue: base => ({
-        ...base,
-        color: 'black'
-      }),
-      indicatorSeparator: () => ({
-          display: 'none'
-      }),
-    });
-  }, [theme]);
+  const customStyles = {
+    control: (base, state) => ({
+      ...base,
+      border: state.isFocused ? '1.5px solid black' : '1.5px solid lightgray',
+      boxShadow: 'none',
+      borderRadius: 0,
+      minWidth: '100px',
+      overflow:'hidden',
+      whiteSpace: 'nowrap',
+      '&:hover': {
+        cursor: 'pointer'
+      },
+      backgroundColor: theme === 'dark' ? 'black' : 'white',
+      textColor: theme === 'dark' ? 'white' : 'black',
+    }),
+    option: (base, { isFocused, isSelected }) => ({
+      ...base,
+      fontSize: '0.875rem',
+      cursor: 'pointer',
+      backgroundColor: isSelected ? (theme === 'dark' ? 'darkgray' : 'lightgray') : (theme === 'dark' ? 'black' : 'white'),
+      color: theme === 'dark' ? 'white' : 'black',
+      whiteSpace: 'nowrap',
+    }),
+    menu: base => ({
+      ...base,
+      boxShadow: theme === 'dark' ? '-9px 11px 13px -9px rgba(0,0,0,0.5)' : '-9px 11px 13px -9px rgba(0,0,0,0.16)',
+      padding : '0.25rem',
+      borderRadius: 'none',
+      width: 'auto',  // set width to auto to match width of longest option
+      backgroundColor: theme === 'dark' ? 'black' : 'white',
+      color: theme === 'dark' ? 'white' : 'black',
+    }),
+    singleValue: base => ({
+      ...base,
+      color: theme === 'dark' ? 'white' : 'black',
+    }),
+    indicatorSeparator: () => ({
+      display: 'none'
+    }),
+  };
   const updateURL = (newQuery) => {
     for(let key in newQuery) {
       if(newQuery[key] === undefined) {

@@ -1,5 +1,6 @@
 import { ChevronDoubleUpIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
+
 /*
  * Footer component for the website.
  * Renders 2023 .Web3Deals All rights reserved.
