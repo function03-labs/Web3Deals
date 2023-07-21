@@ -70,7 +70,7 @@ export const columns: ColumnDef<Project>[] = [
   },
   {
     accessorKey: "investors",
-    header: "Main Investors",
+    header: "Investors",
     cell: ({ row }) => {
       
       return (

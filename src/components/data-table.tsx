@@ -247,7 +247,7 @@ const updateSearchValue = (value: string) => {
 
   <div className="flex flex-wrap items-center justify-between pt-3 text-gray-500">
     <div className="w-full sm:w-auto text-center sm:text-left mb-2 sm:mb-0">
-      <p>Page {pageIndex+1} of {pageCount}</p>
+      <p>Page {pageIndex+1}</p>
     </div>
     <div className="flex w-full sm:w-fit items-center space-x-2 justify-center sm:justify-start">
       <Button
