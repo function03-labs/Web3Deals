@@ -74,7 +74,7 @@ function Search({theme}) {
   const customStyles = {
     control: (base, state) => ({
       ...base,
-      border: state.isFocused ? '1.5px solid black' : '1.5px solid lightgray',
+      border: state.isFocused ?  (theme === 'dark' ? '1.5px solid white' : '1.5px solid black')  : '1.5px solid lightgray',
       boxShadow: 'none',
       borderRadius: 0,
       minWidth: '100px',
@@ -85,6 +85,7 @@ function Search({theme}) {
       },
       backgroundColor: theme === 'dark' ? 'black' : 'white',
       textColor: theme === 'dark' ? 'white' : 'black',
+      transition: 'background-color 0.5s, color 0.5s', // Added transition
     }),
     option: (base, { isFocused, isSelected }) => ({
       ...base,
@@ -93,6 +94,7 @@ function Search({theme}) {
       backgroundColor: isSelected ? (theme === 'dark' ? 'darkgray' : 'lightgray') : (theme === 'dark' ? 'black' : 'white'),
       color: theme === 'dark' ? 'white' : 'black',
       whiteSpace: 'nowrap',
+      transition: 'background-color 0.5s, color 0.5s', // Added transition
     }),
     menu: base => ({
       ...base,
@@ -102,10 +104,12 @@ function Search({theme}) {
       width: 'auto',  // set width to auto to match width of longest option
       backgroundColor: theme === 'dark' ? 'black' : 'white',
       color: theme === 'dark' ? 'white' : 'black',
+      transition: 'background-color 0.5s, color 0.5s, box-shadow 0.5s', // Added transition
     }),
     singleValue: base => ({
       ...base,
       color: theme === 'dark' ? 'white' : 'black',
+      transition: 'color 0.5s', // Added transition
     }),
     indicatorSeparator: () => ({
       display: 'none'
