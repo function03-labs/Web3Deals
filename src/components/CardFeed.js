@@ -13,7 +13,8 @@ async function fetchStats(timeframe) {
 const Options = [
   { value: 'week', label: 'This Week' },
   { value: 'month', label: 'This Month' },
-  { value: 'year', label: 'This Year' }]
+  { value: 'year', label: 'This Year' },
+  { value:'all', label: 'All Time'}]
 
 const CardFeed = ({theme}) => {
   const [timeframe, setTimeframe] = useState(Options[0]);
