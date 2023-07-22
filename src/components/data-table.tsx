@@ -160,7 +160,7 @@ export function DataTable<TData, TValue>({
   </div>
 
   <div className="overflow-x-auto rounded-md border border-gray-200">
-    <Table className="w-full">
+    <Table className="w-full relative">
       <TableHeader>
         {table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={headerGroup.id} className="text-gray-500">

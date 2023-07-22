@@ -5,10 +5,10 @@ const Card = ({ title, icon, mainStat, comparisonStat, theme }) => {
   const themeColors = theme === 'dark' ? 
     { 
       bg: 'bg-black', 
-      border: 'border-gray-400', 
-      title: 'text-white', 
-      stat: 'text-white',
-      description: 'text-gray-300'
+      border: 'border-gray-300', 
+      title: 'text-gray-300', 
+      stat: 'text-gray-300',
+      description: 'text-gray-400'
     } : 
     { 
       bg: 'bg-white', 
@@ -19,7 +19,7 @@ const Card = ({ title, icon, mainStat, comparisonStat, theme }) => {
     };
 
   return (
-    <div className={`card p-6 border-2 ${themeColors.bg} ${themeColors.border} rounded-lg shadow-lg`}>
+    <div className={`card p-4 border-[1px] ${themeColors.bg} ${themeColors.border} rounded-lg shadow-md`}>
       <div className={`card-header flex flex-row items-center justify-between space-y-2 pb-4 border-b-2`}>
         <div className={`card-title text-lg font-bold ${themeColors.title}`}>
           {title}
