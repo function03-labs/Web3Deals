@@ -59,7 +59,7 @@ function Search({theme}) {
     { value: 'nfts', label: 'NFTs' },
     { value: 'infrastructure', label: 'Infrastructure' },
     { value: 'cefi', label: 'CeFi' },
-    { value: 'others', label: 'Others' },
+    { value: 'misc.', label: 'Misc.' },
   ];
 
   const roundOptions = [

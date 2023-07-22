@@ -28,4 +28,5 @@ body, select {
   background-color: var(--color-bg);
   color: var(--color-text);
   transition: all .5s ease;
+  width: 100vw;
 }

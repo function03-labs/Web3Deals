@@ -23,10 +23,19 @@ export type Project = {
   date : number
   count : number
   stage: string
-  categories: "DeFi" | "CeFi" | "Web3" | "Others" | "NFTs" | "Infrastructure"
+  categories: string
   investors: string
 
 }
+
+function formatAmount(n) {
+  if (n >= 1e9) {
+    return (n / 1e9).toFixed(3) + 'B';
+  } else {
+    return (n / 1e6).toFixed(2) + 'M';
+  }
+}
+
 
 export const columns: ColumnDef<Project>[] = [
   {
@@ -44,6 +53,9 @@ export const columns: ColumnDef<Project>[] = [
   {
     accessorKey: "categories",
     header: "Categories",
+    cell: ({ row }) => {
+      return (row.getValue("categories") as string).split(',').map(category => category === 'Others' ? 'Misc.' : category).join(', ');
+    },
   },
   {
     accessorKey: "stage",
@@ -65,7 +77,7 @@ export const columns: ColumnDef<Project>[] = [
     },
     cell: ({ row }) => {
       
-      return <div className=" text-start font-medium">{row.getValue("amount") ? '$'+(parseInt(row.getValue("amount")) / 1000000).toFixed(2)+ 'M': '--'}</div>
+      return <div className=" text-start font-medium">{row.getValue("amount") ? '$'+formatAmount(parseInt(row.getValue("amount"))): '--'}</div>
     },
   },
   {

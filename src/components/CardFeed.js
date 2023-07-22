@@ -10,6 +10,18 @@ async function fetchStats(timeframe) {
   return await res.json();
 }
 
+function formatAmount(n) {
+  if (n >= 1e9) {
+    return (n / 1e9).toFixed(3) + 'B';
+  } else {
+    return (n / 1e6).toFixed(2) + 'M';
+  }
+}
+
+function formatAmountForPercentage(total, n) {
+  return (n * 100 / total).toFixed(1);
+}
+
 const Options = [
   { value: 'week', label: 'This Week' },
   { value: 'month', label: 'This Month' },
@@ -23,27 +35,29 @@ const CardFeed = ({theme}) => {
     fetchStats(timeframe) 
     .then(data => {
         setStats([
-          { title: 'Total Funding Amount', 
-           icon:  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="h-4 w-4 text-muted-foreground"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>, 
-           mainStat: '$'+(parseInt(data.totalFundAmount) / 1000000000).toFixed(3)+ 'B', 
-           comparisonStat: 'Across '+data.funds+ ' projects'},
+          {
+            title: 'Total Funding Amount', 
+            icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="h-4 w-4 text-muted-foreground"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>, 
+            mainStat: '$' + formatAmount(parseInt(data.totalFundAmount)), 
+            comparisonStat: 'Across '+data.funds+ ' projects'
+          },
            {
             title: 'Top Categories',
             icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="h-4 w-4 text-gray-500"><rect width="20" height="14" x="2" y="5" rx="2" /><path d="M2 10h20" /></svg>,
             mainStat: <div>
-              <p className="text-lg font-semibold mb-1">{data.topCategories[0]._id+ ' - $'+(parseInt(data.topCategories[0].sum) / 1000000).toFixed(2)+ 'M'+' ('+(parseInt(data.topCategories[0].sum) * 100 / parseInt(data.totalFundAmount) ).toFixed(1)+ '%)'}</p>
-              <p className="text-sm font-medium text-gray-500 mb-2">{data.topCategories[1]._id+ ' - $'+(parseInt(data.topCategories[1].sum) / 1000000).toFixed(2)+ 'M'+' ('+(parseInt(data.topCategories[1].sum) * 100 / parseInt(data.totalFundAmount) ).toFixed(1)+ '%)'}</p>
-              <p className="text-xs font-medium text-gray-500 whitespace-nowrap">{data.topCategories[2]._id+' - $'+(parseInt(data.topCategories[2].sum) / 1000000).toFixed(2)+ 'M'+' ('+(parseInt(data.topCategories[2].sum) * 100 / parseInt(data.totalFundAmount) ).toFixed(1)+ '%)'}</p>
-            </div>
-          },
+      <p className="text-lg font-semibold mb-1">{(data.topCategories[0]._id === 'Others' ? 'Misc.' : data.topCategories[0]._id) + ' - $' + formatAmount(parseInt(data.topCategories[0].sum))+' ('+formatAmountForPercentage(parseInt(data.totalFundAmount), parseInt(data.topCategories[0].sum)) + '%)'}</p>
+      <p className="text-sm font-medium text-gray-500 mb-2">{(data.topCategories[1]._id === 'Others' ? 'Misc.' : data.topCategories[1]._id) + ' - $'+formatAmount(parseInt(data.topCategories[1].sum))+' ('+formatAmountForPercentage(parseInt(data.totalFundAmount), parseInt(data.topCategories[1].sum)) + '%)'}</p>
+      <p className="text-xs font-medium text-gray-500 whitespace-nowrap">{(data.topCategories[2]._id === 'Others' ? 'Misc.' : data.topCategories[2]._id) + ' - $'+formatAmount(parseInt(data.topCategories[2].sum))+' ('+formatAmountForPercentage(parseInt(data.totalFundAmount), parseInt(data.topCategories[2].sum)) + '%)'}</p>
+    </div>
+          },          
           {
-            title: 'Biggest Movers',
+            title: 'Biggest Raises',
             icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="h-4 w-4 text-gray-500"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>,
             mainStat: <div>
-              <p className="text-lg font-semibold mb-1"><img className="w-6 h-6 rounded mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topProjects[0].logo}`}/> {data.topProjects[0]._id+' - '+'$'+(parseInt(data.topProjects[0].sum) / 1000000).toFixed(2)+ 'M'}</p>
-              <p className="text-sm font-medium text-gray-500 mb-1"><img className="w-6 h-6 rounded mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topProjects[1].logo}`}/>{data.topProjects[1]._id+' - $'+(parseInt(data.topProjects[1].sum) / 1000000).toFixed(2)+ 'M'}</p>
-              <p className="text-xs font-medium text-gray-500 whitespace-nowrap"><img className="w-6 h-6 rounded mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topProjects[2].logo}`}/> {data.topProjects[2]._id+' - $'+(parseInt(data.topProjects[2].sum) / 1000000).toFixed(2)+ 'M'}</p>
-            </div>,
+      <p className="text-lg font-semibold mb-1"><img className="w-6 h-6 rounded mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topProjects[0].logo}`}/> {data.topProjects[0]._id+' - '+'$'+formatAmount(parseInt(data.topProjects[0].sum))}</p>
+      <p className="text-sm font-medium text-gray-500 mb-1"><img className="w-6 h-6 rounded mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topProjects[1].logo}`}/>{data.topProjects[1]._id+' - $'+formatAmount(parseInt(data.topProjects[1].sum))}</p>
+      <p className="text-xs font-medium text-gray-500 whitespace-nowrap"><img className="w-6 h-6 rounded mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topProjects[2].logo}`}/> {data.topProjects[2]._id+' - $'+formatAmount(parseInt(data.topProjects[2].sum))}</p>
+    </div>,
           },
           {
             title: 'Most Actif Investors',
@@ -71,8 +85,8 @@ const CardFeed = ({theme}) => {
       border: state.isFocused ?  (theme === 'dark' ? '1.5px solid white' : '1.5px solid black')  : '1.5px solid lightgray',
       boxShadow: 'none',
       borderRadius: 0,
-      Width:'100px',
-      minWidth: '100px',
+      width: '200px',
+    minWidth: '200px',
       overflow:'hidden',
       whiteSpace: 'nowrap',
       '&:hover': {

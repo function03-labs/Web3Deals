@@ -14,11 +14,11 @@ export default function Home() {
       </Head>
       <div className="relative">
         <Header theme={theme} setTheme={setTheme} />
-        <div className="lg:px-32 md:px-26 sm:px-12">
+        <div className="lg:px-32 md:px-26 sm:px-12 w-screen">
           <CardFeed theme={theme} />
           <DemoPage theme={theme} />
         </div>
-        <Footer />
+        <Footer/>
       </div>
     </div>
   );

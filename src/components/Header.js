@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { useState,useEffect } from 'react';
+import { useEffect } from 'react';
 
 function SunIcon() {
   return (
@@ -44,8 +44,8 @@ function Header({theme, setTheme}) {
 
   return (
       <header className="z-20 ease-linear  flex flex-col md:flex-row justify-between items-center py-2 sm:py-3 md:py-3 lg:px-[12rem] md:px-[8rem] border-b-2 border-[#F2F2F2]">
-          <Image  src={theme === 'light' ? "/assets/logo2.png" : "/assets/logo1.png"} alt="Logo" width={160} height={40} style={{ objectFit: 'contain' }} />
-          <nav class="hidden items-center space-x-2 pt-1  lg:flex">
+          <h1  className="cursor-pointer text-2xl font-bold tracking-widest">.Web3Deals</h1>
+          <nav class=" items-center space-x-2 pt-1 flex">
             <a target="_blank" rel="noreferrer" href="https://github.com/function03-labs/Web3Deals">
               <div className="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md w-9 px-0">
                 <svg viewBox="0 0 438.549 438.549" className="h-5 w-5">
