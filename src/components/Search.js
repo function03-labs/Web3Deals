@@ -1,6 +1,19 @@
 import { useState,useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Select from 'react-select';
+import Select,{components} from 'react-select';
+import { PlusCircleIcon } from 'lucide-react';
+
+
+const DropdownIndicator = (props) => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+        <PlusCircleIcon width='16' height='16'/>
+      </div>
+    </components.DropdownIndicator>
+  );
+};
+
 
 function Search({theme}) {
   const Router = useRouter();
@@ -74,7 +87,7 @@ function Search({theme}) {
   const customStyles = {
     control: (base, state) => ({
       ...base,
-      border: state.isFocused ?  (theme === 'dark' ? '1.5px solid white' : '1.5px solid black')  : '1.5px solid lightgray',
+      border: state.isFocused ?  (theme === 'dark' ? '1.5px dashed white' : '1.5px dashed black')  : '1.5px dashed lightgray',
       boxShadow: 'none',
       borderRadius: 0,
       minWidth: '100px',
@@ -171,6 +184,9 @@ function Search({theme}) {
       isClearable
       placeholder="Category"
       className="w-full sm:w-auto"
+      components={{
+        DropdownIndicator,
+      }}
     />
     <Select
       styles={customStyles}
@@ -180,6 +196,9 @@ function Search({theme}) {
       isClearable
       placeholder="Funding Round"
       className="w-full sm:w-auto"
+      components={{
+        DropdownIndicator,
+      }}
     />
     <Select
       styles={customStyles}
@@ -189,6 +208,9 @@ function Search({theme}) {
       isClearable
       placeholder="Amount"
       className="w-full sm:block hidden md:block sm:w-auto"
+      components={{
+        DropdownIndicator,
+      }}
     />
     <Select
       styles={customStyles}
@@ -198,6 +220,9 @@ function Search({theme}) {
       isClearable
       placeholder="Year"
       className="w-full sm:block hidden md:block sm:w-auto"
+      components={{
+        DropdownIndicator,
+      }}
     />
   </div>
   );
