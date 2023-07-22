@@ -39,7 +39,7 @@ const CardFeed = ({theme}) => {
             title: 'Total Funding Amount', 
             icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="h-4 w-4 text-muted-foreground"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></svg>, 
             mainStat: '$' + formatAmount(parseInt(data.totalFundAmount)), 
-            comparisonStat: 'Across '+data.funds+ ' projects'
+            comparisonStat: 'Across '+data.funds+ ' funding raises'
           },
            {
             title: 'Top Categories',
@@ -54,18 +54,18 @@ const CardFeed = ({theme}) => {
             title: 'Biggest Raises',
             icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="h-4 w-4 text-gray-500"><path d="M22 12h-4l-3 9L9 3l-3 9H2" /></svg>,
             mainStat: <div>
-      <p className="text-lg font-semibold mb-1"><img className="w-6 h-6 rounded mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topProjects[0].logo}`}/> {data.topProjects[0]._id+' - '+'$'+formatAmount(parseInt(data.topProjects[0].sum))}</p>
-      <p className="text-sm font-medium text-gray-500 mb-1"><img className="w-6 h-6 rounded mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topProjects[1].logo}`}/>{data.topProjects[1]._id+' - $'+formatAmount(parseInt(data.topProjects[1].sum))}</p>
-      <p className="text-xs font-medium text-gray-500 whitespace-nowrap"><img className="w-6 h-6 rounded mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topProjects[2].logo}`}/> {data.topProjects[2]._id+' - $'+formatAmount(parseInt(data.topProjects[2].sum))}</p>
+      <p className="text-lg font-semibold mb-1"><img className="w-6 h-6 mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topProjects[0].logo}`}/> {data.topProjects[0]._id+' - '+'$'+formatAmount(parseInt(data.topProjects[0].sum))}</p>
+      <p className="text-sm font-medium text-gray-500 mb-1"><img className="w-6 h-6 mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topProjects[1].logo}`}/>{data.topProjects[1]._id+' - $'+formatAmount(parseInt(data.topProjects[1].sum))}</p>
+      <p className="text-xs font-medium text-gray-500 whitespace-nowrap"><img className="w-6 h-6  mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topProjects[2].logo}`}/> {data.topProjects[2]._id+' - $'+formatAmount(parseInt(data.topProjects[2].sum))}</p>
     </div>,
           },
           {
             title: 'Most Actif Investors',
             icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="h-4 w-4 text-gray-500 mb-1"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" /></svg>,
             mainStat: <div>
-              <p className="text-lg font-semibold mb-1"><img className="w-6 h-6 rounded mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topInvestors[0].logo}`}/> {data.topInvestors[0]._id}</p>
-              <p className="text-sm font-medium text-gray-500 mb-1"><img className="w-6 h-6 rounded mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topInvestors[1].logo}`}/> {data.topInvestors[1]._id}</p>
-              <p className="text-xs font-medium text-gray-500"><img className="w-6 h-6 rounded mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topInvestors[2].logo}`}/> {data.topInvestors[2]._id}</p>
+              <p className="text-lg font-semibold mb-1"><img className="w-6 h-6  mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topInvestors[0].logo}`}/> {data.topInvestors[0]._id}</p>
+              <p className="text-sm font-medium text-gray-500 mb-1"><img className="w-6 h-6  mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topInvestors[1].logo}`}/> {data.topInvestors[1]._id}</p>
+              <p className="text-xs font-medium text-gray-500"><img className="w-6 h-6 mr-2 inline mb-1" src={`https://s1.coincarp.com${data.topInvestors[2].logo}`}/> {data.topInvestors[2]._id}</p>
             </div>
           }
           ]);
