@@ -176,55 +176,55 @@ function Search({theme}) {
   
   return (
     <div className="flex  flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-3 md:mx-8 mt-2 md:mt-0">
-    <Select
-      styles={customStyles}
-      options={categoryOptions}
-      value={category}
-      onChange={handleCategoryChange}
-      isClearable
-      placeholder="Category"
-      className="w-full sm:w-auto"
-      components={{
-        DropdownIndicator,
-      }}
-    />
-    <Select
-      styles={customStyles}
-      options={roundOptions}
-      value={round}
-      onChange={handleRoundChange}
-      isClearable
-      placeholder="Funding Round"
-      className="w-full sm:w-auto"
-      components={{
-        DropdownIndicator,
-      }}
-    />
-    <Select
-      styles={customStyles}
-      options={amountOptions}
-      value={amount}
-      onChange={handleAmountChange}
-      isClearable
-      placeholder="Amount"
-      className="w-full sm:block hidden md:block sm:w-auto"
-      components={{
-        DropdownIndicator,
-      }}
-    />
-    <Select
-      styles={customStyles}
-      options={years}
-      value={date}
-      onChange={handleDateChange}
-      isClearable
-      placeholder="Year"
-      className="w-full sm:block hidden md:block sm:w-auto"
-      components={{
-        DropdownIndicator,
-      }}
-    />
-  </div>
+      <Select
+        styles={customStyles}
+        options={categoryOptions}
+        value={category}
+        onChange={handleCategoryChange}
+        isClearable
+        placeholder="Category"
+        className="w-full sm:w-auto"
+        components={{
+          DropdownIndicator,
+        }}
+      />
+      <Select
+        styles={customStyles}
+        options={roundOptions}
+        value={round}
+        onChange={handleRoundChange}
+        isClearable
+        placeholder="Funding Round"
+        className="w-full sm:w-auto"
+        components={{
+          DropdownIndicator,
+        }}
+      />
+      <Select
+        styles={customStyles}
+        options={amountOptions}
+        value={amount}
+        onChange={handleAmountChange}
+        isClearable
+        placeholder="Amount"
+        className="w-full sm:block hidden md:block sm:w-auto"
+        components={{
+          DropdownIndicator,
+        }}
+      />
+      <Select
+        styles={customStyles}
+        options={years}
+        value={date}
+        onChange={handleDateChange}
+        isClearable
+        placeholder="Year"
+        className="w-full sm:block hidden md:block sm:w-auto"
+        components={{
+          DropdownIndicator,
+        }}
+      />
+    </div>
   );
 }
 

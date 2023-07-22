@@ -1,63 +1,73 @@
 import mongoose from 'mongoose';
 
+// MongoDB connection URI
 const uri = 'mongodb+srv://admin:web3deals@cluster-web3deals.sx22edf.mongodb.net/data?retryWrites=true&w=majority';
 
+// A flag to track if the database is already connected
 let isConnected = false;
 
+// Function to connect to the MongoDB database
 async function connectDatabase() {
   if (isConnected) {
     return;
   }
 
   try {
+    // Connect to the MongoDB using the provided URI
     await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
     isConnected = true;
-    console.log('Connected to MongoDB');
   } catch (error) {
     console.error('Failed to connect to MongoDB:', error);
   }
 }
 
+// Export the connectDatabase function to be used in other parts of the application
 export default connectDatabase;
+
+// Define the Mongoose schema for the "Fundraising" collection
 const projectSchema = new mongoose.Schema({
-    _id: mongoose.Types.ObjectId,
-    fundcode: String,
-    categorylist: [
-      {
-        code: String,
-        name: String,
-      },
-    ],
-    coincode: String,
-    coinsymbol: String,
-    fundamount: Number,
-    funddate: Number,
-    fundstagecode: String,
-    fundstagename: String,
-    investorcodes: String,
-    investorcount: Number,
-    investorlist: [
-      {
-        investorlogo: String,
-        investorcode: String,
-        investorname: String,
-      },
-    ],
-    investorlogos: String,
-    investornames: String,
-    logo: String,
-    projectcode: String,
-    projectname: String,
-    valulation: Number,
-  });
-  
-  let Fundraising;
-  try {
-    Fundraising = mongoose.model('Fundraising');
-  } catch (error) {
-    Fundraising = mongoose.model('Fundraising', projectSchema, 'fundraising');
-  }
-export {Fundraising};
+  _id: mongoose.Types.ObjectId,
+  fundcode: String,
+  categorylist: [
+    {
+      code: String,
+      name: String,
+    },
+  ],
+  coincode: String,
+  coinsymbol: String,
+  fundamount: Number,
+  funddate: Number,
+  fundstagecode: String,
+  fundstagename: String,
+  investorcodes: String,
+  investorcount: Number,
+  investorlist: [
+    {
+      investorlogo: String,
+      investorcode: String,
+      investorname: String,
+    },
+  ],
+  investorlogos: String,
+  investornames: String,
+  logo: String,
+  projectcode: String,
+  projectname: String,
+  valulation: Number,
+});
+
+// Declare the "Fundraising" model using the schema
+let Fundraising;
+try {
+  Fundraising = mongoose.model('Fundraising');
+} catch (error) {
+  // If the model already exists, use the existing model; otherwise, create a new one
+  Fundraising = mongoose.model('Fundraising', projectSchema, 'fundraising');
+}
+
+// Export the "Fundraising" model to be used in other parts of the application
+export { Fundraising };

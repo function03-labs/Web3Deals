@@ -1,37 +1,11 @@
+import { useEffect, useCallback, useState } from "react";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import * as React from "react"
 import Search from "@/components/Search";
-
-import {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  getFilteredRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table"
-
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "./ui/table"
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import {ColumnDef, ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreRowModel, getPaginationRowModel, getFilteredRowModel, getSortedRowModel, useReactTable} from "@tanstack/react-table"
+import {DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "./ui/table"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -56,7 +30,7 @@ export function DataTable<TData, TValue>({
   const sort = searchParams?.get("sort")
   const [column, order] = sort?.split(".") ?? []
   const searchTerm = searchParams?.get("search")
-  React.useEffect(() => {
+  useEffect(() => {
     if (sort && (column !== sorting[0]?.id || order !== (sorting[0]?.desc ? "desc" : "asc"))) {
       setSorting([
         {
@@ -67,9 +41,8 @@ export function DataTable<TData, TValue>({
     }
   }, [column, order]);
   
-   // Create query string
-   const createQueryString = React.useCallback(
-    (params: Record<string, string | number | null>) => {
+  // Create query string
+  const createQueryString = useCallback((params: Record<string, string | number | null>) => {
       const newSearchParams = new URLSearchParams(searchParams?.toString())
 
       for (const [key, value] of Object.entries(params)) {
@@ -79,56 +52,43 @@ export function DataTable<TData, TValue>({
           newSearchParams.set(key, String(value))
         }
       }
-
-      return newSearchParams.toString()
-    },
-    [searchParams]
+      return newSearchParams.toString()},[searchParams]
   )
-  const [sorting, setSorting] = React.useState<SortingState>([{
-    id: column ?? "",
-    desc: order === "desc",
-  },
-])
-React.useEffect(() => {
-  const sortParam = sorting[0]?.id
-    ? `${sorting[0]?.id}.${sorting[0]?.desc ? "desc" : "asc"}`
-    : null;
-  if (sort !== sortParam) {
+    
+  const [sorting, setSorting] = useState<SortingState>([{id: column ?? "",desc: order === "desc"}])
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  useEffect(() => {
+    const sortParam = sorting[0]?.id
+      ? `${sorting[0]?.id}.${sorting[0]?.desc ? "desc" : "asc"}`
+      : null;
+    if (sort !== sortParam) {
+      router.push(
+        `${pathname}?${createQueryString({
+          sort: sortParam,
+        })}`
+      );
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sorting]);
+
+  useEffect(() => {
+    const currentSearchValue = table.getColumn("project")?.getFilterValue() as string;
+    if (searchTerm !== currentSearchValue) {
+      table.getColumn("project")?.setFilterValue(searchTerm ?? "")
+    }
+  }, [searchTerm])
+
+  // Update search parameter when search field value changes
+  const updateSearchValue = (value: string) => {
     router.push(
       `${pathname}?${createQueryString({
-        sort: sortParam,
+        search: value,
       })}`
     );
+    table.getColumn("project")?.setFilterValue(value)
   }
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [sorting]);
-
-React.useEffect(() => {
-  const currentSearchValue = table.getColumn("project")?.getFilterValue() as string;
-  if (searchTerm !== currentSearchValue) {
-    table.getColumn("project")?.setFilterValue(searchTerm ?? "")
-  }
-}, [searchTerm])
-
-// Update search parameter when search field value changes
-const updateSearchValue = (value: string) => {
-  router.push(
-    `${pathname}?${createQueryString({
-      search: value,
-    })}`
-  );
-  table.getColumn("project")?.setFilterValue(value)
-}
-
-
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
-  
-  const [columnVisibility, setColumnVisibility] =
-  React.useState<VisibilityState>({})
-  
+ 
   const table = useReactTable({
     data,
     columns,
@@ -147,7 +107,7 @@ const updateSearchValue = (value: string) => {
     },
   })
 
-  React.useEffect(() => {
+  useEffect(() => {
     table.setPageSize(40);
   }, []);
   
