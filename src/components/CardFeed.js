@@ -32,7 +32,7 @@ const CardFeed = ({theme}) => {
             icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="h-4 w-4 text-gray-500"><rect width="20" height="14" x="2" y="5" rx="2" /><path d="M2 10h20" /></svg>,
             mainStat: <div>
               <p className="text-lg font-semibold mb-1">{data.topCategories[0]._id+ ' - $'+(parseInt(data.topCategories[0].sum) / 1000000).toFixed(2)+ 'M'+' ('+(parseInt(data.topCategories[0].sum) * 100 / parseInt(data.totalFundAmount) ).toFixed(1)+ '%)'}</p>
-              <p className="text-sm font-medium text-gray-500 mb-1">{data.topCategories[1]._id+ ' - $'+(parseInt(data.topCategories[1].sum) / 1000000).toFixed(2)+ 'M'+' ('+(parseInt(data.topCategories[1].sum) * 100 / parseInt(data.totalFundAmount) ).toFixed(1)+ '%)'}</p>
+              <p className="text-sm font-medium text-gray-500 mb-2">{data.topCategories[1]._id+ ' - $'+(parseInt(data.topCategories[1].sum) / 1000000).toFixed(2)+ 'M'+' ('+(parseInt(data.topCategories[1].sum) * 100 / parseInt(data.totalFundAmount) ).toFixed(1)+ '%)'}</p>
               <p className="text-xs font-medium text-gray-500 whitespace-nowrap">{data.topCategories[2]._id+' - $'+(parseInt(data.topCategories[2].sum) / 1000000).toFixed(2)+ 'M'+' ('+(parseInt(data.topCategories[2].sum) * 100 / parseInt(data.totalFundAmount) ).toFixed(1)+ '%)'}</p>
             </div>
           },
