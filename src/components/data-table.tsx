@@ -54,7 +54,6 @@ export function DataTable<TData, TValue>({
       }
       return newSearchParams.toString()},[searchParams]
   )
-    
   const [sorting, setSorting] = useState<SortingState>([{id: column ?? "",desc: order === "desc"}])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -118,11 +117,12 @@ export function DataTable<TData, TValue>({
   <div className="flex flex-wrap items-center pb-3">
     <div className="w-full sm:w-auto mb-2 sm:mb-0">
       <Input
+      id='myInput'
         placeholder="Filter Projects..."
         value={(table.getColumn("project")?.getFilterValue() as string) ?? ""}
         className={theme ==='light' ? "border-2 text-gray-500 border-gray-200 p-2":"border-2 border-gray-400 text-gray-400 p-2" }
         onChange={(event) => { 
-          updateSearchValue(event.target.value)}
+          updateSearchValue(event.target.value);}  
         }
       />
     </div>

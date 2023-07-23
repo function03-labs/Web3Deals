@@ -111,7 +111,6 @@ export const columns: ColumnDef<Project>[] = [
             <DropdownMenuItem className="cursor-pointer" onClick={() => navigator.clipboard.writeText(payment.project)}>
               Copy projects name
             </DropdownMenuItem>
-            <DropdownMenuItem className="cursor-pointer">Filter By Projects Name</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
