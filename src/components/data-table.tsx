@@ -31,7 +31,7 @@ export function DataTable<TData, TValue>({
   const [column, order] = sort?.split(".") ?? []
   const searchTerm = searchParams?.get("search")
   useEffect(() => {
-    if (sort && (column !== sorting[0]?.id || order !== (sorting[0]?.desc ? "desc" : "asc"))) {
+    if (sort && (column !== sorting[0]?.id || order !== (sorting[0]?.desc ? "asc" : "desc"))) {
       setSorting([
         {
           id: column ?? "",
@@ -54,13 +54,15 @@ export function DataTable<TData, TValue>({
       }
       return newSearchParams.toString()},[searchParams]
   )
-  const [sorting, setSorting] = useState<SortingState>([{id: column ?? "",desc: order === "desc"}])
+  const [sorting, setSorting] = useState<SortingState>([{id: column ?? "",desc: order === "asc"}])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+
+
   useEffect(() => {
     const sortParam = sorting[0]?.id
-      ? `${sorting[0]?.id}.${sorting[0]?.desc ? "desc" : "asc"}`
-      : null;
+      ? `${sorting[0]?.id}.${sorting[0]?.desc ? "asc" : "desc"}`
+      : 'date.desc';
     if (sort !== sortParam) {
       router.push(
         `${pathname}?${createQueryString({
@@ -120,9 +122,9 @@ export function DataTable<TData, TValue>({
       id='myInput'
         placeholder="Filter Projects..."
         value={(table.getColumn("project")?.getFilterValue() as string) ?? ""}
-        className={theme ==='light' ? "border-[1.85px] text-gray-400 border-gray-200  p-2":"border-[1.75px] border-gray-600 text-gray-400 p-2" }
-        onChange={(event) =>
-          updateSearchValue(event.target.value)
+        className={theme ==='light' ? "border text-gray-500 border-gray-200 p-2":"border border-gray-400 text-gray-400 p-2" }
+        onChange={(event) => { 
+          updateSearchValue(event.target.value);}  
         }
       />
     </div>

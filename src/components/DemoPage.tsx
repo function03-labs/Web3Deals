@@ -7,8 +7,9 @@ import { isEqual } from "lodash";
 async function getData(query, pageIndex = 0): Promise<{ projects: Project[], total_pages: number }> {
   const start = pageIndex ; // adjust start to fetch two "pages" at once
   const sortParts = query.sort ? query.sort.split(".") : [];
-  const sortField = sortParts[0] == 'amount' ? 'fundamount' : 'funddate';
-  const sortOrder = sortParts[1];
+  let sortField = sortParts[0] == 'amount' ? 'fundamount' : 'funddate';
+  let sortOrder = sortParts[1] || 'desc';
+
   // define a helper function to make a request with a given start index
   async function fetchPage(startIndex) {
     let apiUrl = `/api/data?start=${startIndex+1}`;
