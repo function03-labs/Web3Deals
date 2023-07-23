@@ -134,7 +134,7 @@ const CardFeed = ({theme}) => {
       <Select styles={customStyles} options={Options} value={timeframe} onChange={handleTimeframeChange} placeholder="This Week"/>
       <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ">
         {stats.map((cardData,index) => (
-            <Card id={index} key={index} title={cardData.title} icon={cardData.icon} mainStat={cardData.mainStat} comparisonStat={cardData.comparisonStat} theme={theme} />)
+            <Card key={cardData.title} title={cardData.title} icon={cardData.icon} mainStat={cardData.mainStat} comparisonStat={cardData.comparisonStat} theme={theme} />)
             )
         }
       </div>

@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { useState } from "react";
 import Header from '@/components/Header';
 import Footer from "@/components/Footer";
@@ -8,10 +7,7 @@ import DemoPage from '@/components/DemoPage';
 export default function Home() {
   const [theme, setTheme] = useState('light');
   return (
-    <div >
-      <Head>
-        <title>Web3Deals</title>
-      </Head>
+    <div>
       <Header theme={theme} setTheme={setTheme} />
       <main className="relative">
         <div className="lg:px-32 md:px-26 sm:px-12">
