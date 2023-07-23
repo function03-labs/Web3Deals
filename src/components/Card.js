@@ -39,16 +39,16 @@ const Card = ({ title, icon, mainStat, comparisonStat, theme }) => {
 Card.propTypes = {
   title: PropTypes.string.isRequired,
   icon: PropTypes.node.isRequired,
-  stat: PropTypes.oneOfType([
+  mainStat: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.node,
   ]).isRequired,
-  description: PropTypes.string,
+  comparisonStat: PropTypes.string,
   theme: PropTypes.string
 };
 
 Card.defaultProps = {
-  description: '',
+  comparisonStat: '',
   theme: 'light'
 };
 
