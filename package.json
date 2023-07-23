@@ -34,7 +34,6 @@
   },
   "devDependencies": {
     "@types/lodash": "^4.14.195",
-    "typescript": "5.1.6",
-    "@material-ui/lab": "^4.0.0-alpha.61"
+    "typescript": "5.1.6"
   }
 }

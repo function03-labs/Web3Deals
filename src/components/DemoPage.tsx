@@ -3,7 +3,6 @@ import { Project, columns } from "./columns"
 import { DataTable } from "./data-table"
 import { useRouter } from "next/router";
 import { isEqual } from "lodash";
-import { Skeleton } from "@material-ui/lab";
 
 const ITEMS_PER_PAGE = 40; // Define how many items you want to fetch per API call
 
