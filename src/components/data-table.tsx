@@ -81,12 +81,13 @@ export function DataTable<TData, TValue>({
 
   // Update search parameter when search field value changes
   const updateSearchValue = (value: string) => {
-    router.push(
-      `${pathname}?${createQueryString({
-        search: value,
-      })}`
-    );
-    table.getColumn("project")?.setFilterValue(value)
+    if (value.length > 2 || value=="") {
+      router.push(
+        `${pathname}?${createQueryString({
+          search: value,
+        })}`
+      );}
+      table.getColumn("project")?.setFilterValue(value);
   }
  
   const table = useReactTable({
@@ -99,6 +100,7 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     manualSorting: true,
+    manualFiltering: true, 
     onColumnVisibilityChange: setColumnVisibility,
     state: {
       sorting,
@@ -119,8 +121,8 @@ export function DataTable<TData, TValue>({
         placeholder="Filter Projects..."
         value={(table.getColumn("project")?.getFilterValue() as string) ?? ""}
         className={theme ==='light' ? "border-2 text-gray-500 border-gray-200 p-2":"border-2 border-gray-400 text-gray-400 p-2" }
-        onChange={(event) =>
-          updateSearchValue(event.target.value)
+        onChange={(event) => { 
+          updateSearchValue(event.target.value)}
         }
       />
     </div>
