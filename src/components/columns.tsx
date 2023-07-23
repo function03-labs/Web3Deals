@@ -31,7 +31,7 @@ export const columns: ColumnDef<Project>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center">
-          <img src={`https://s1.coincarp.com/${row.original.logo}`} alt="" className="w-6 h-46 rounded mr-2" />
+          <img width={24} height={24} src={`https://s1.coincarp.com/${row.original.logo}`} alt="" className="w-6 h-46 rounded mr-2" />
           <span className="text-left font-medium">{row.getValue("project")}</span>
         </div>
       );
