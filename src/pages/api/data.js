@@ -9,13 +9,14 @@ export default async function handler(req, res) {
 
     // Extract query parameters from the request
     const {
-      page = 1,
       fundstagename = '',
       category = '',
       fundRange = '',
       year,
       projectname = '',
     } = req.query;
+
+    const page = parseInt(req.query.start, 10) || 1;
 
     // Set default sorting field and order if not provided in the query
     const sortField = req.query.sortField || 'funddate';
@@ -46,7 +47,15 @@ export default async function handler(req, res) {
     };
 
     // Add additional filters to the query if the corresponding query parameters are provided
-    if (fundstagename) query.fundstagename = fundstagename;
+    if (fundstagename) {
+      if (fundstagename.toLowerCase() === 'undisclosed') {
+          query.fundstagecode = 'unknown';
+      } else if (fundstagename.toLowerCase() === 'crowdfunding') {
+          query.fundstagecode = 'equity-crowdfunding';
+      } else {
+          query.fundstagecode = fundstagename.toLowerCase();
+      }
+  }
     if (category) query.categorylist = { $elemMatch: { code: category } };
     if (projectname)
       query.projectname = { $regex: projectname, $options: 'i' }; // Perform a case-insensitive search
@@ -67,8 +76,14 @@ export default async function handler(req, res) {
         .sort(sort)
         .exec();
 
-      // Respond with the fetched data as JSON
-      res.status(200).json(data);
+      // Get the total number of documents that match the query criteria
+      const totalDocuments = await Fundraising.countDocuments(query).exec();
+
+      // Calculate the total number of pages
+      const totalPages = Math.ceil(totalDocuments / documentsPerPage);
+
+      // Respond with the fetched data and total number of pages as JSON
+      res.status(200).json({ data, totalPages });
     } catch (error) {
       // Handle errors if the database operation fails
       console.error('Failed to fetch data:', error);
