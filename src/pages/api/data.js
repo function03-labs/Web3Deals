@@ -9,13 +9,14 @@ export default async function handler(req, res) {
 
     // Extract query parameters from the request
     const {
-      page = 1,
       fundstagename = '',
       category = '',
       fundRange = '',
       year,
       projectname = '',
     } = req.query;
+
+    const page = parseInt(req.query.start, 10) || 1;
 
     // Set default sorting field and order if not provided in the query
     const sortField = req.query.sortField || 'funddate';
