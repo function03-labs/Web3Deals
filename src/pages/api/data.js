@@ -68,8 +68,14 @@ export default async function handler(req, res) {
         .sort(sort)
         .exec();
 
-      // Respond with the fetched data as JSON
-      res.status(200).json(data);
+      // Get the total number of documents that match the query criteria
+      const totalDocuments = await Fundraising.countDocuments(query).exec();
+
+      // Calculate the total number of pages
+      const totalPages = Math.ceil(totalDocuments / documentsPerPage);
+
+      // Respond with the fetched data and total number of pages as JSON
+      res.status(200).json({ data, totalPages });
     } catch (error) {
       // Handle errors if the database operation fails
       console.error('Failed to fetch data:', error);

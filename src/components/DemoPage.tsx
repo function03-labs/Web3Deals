@@ -28,27 +28,23 @@ async function getData(query, pageIndex = 0): Promise<{ projects: Project[], tot
 
   // fetch two "pages" of data
   const responses = await Promise.all([fetchPage(start)]);
+  console.log(responses[0].data)
   
   // combine the project data from both responses
-  const allProjects = responses.flatMap(response => {
-    if (response && Array.isArray(response)) {
-      return response.map((project) => ({
-        id: project.projectcode,
-        amount: project.fundamount,
-        project: project.projectname,
-        date: project.funddate,
-        count: project.investorcount,
-        logo: project.logo,
-        stage: project.fundstagename,
-        categories: project.categorylist.map(category => category.name).join(', '),
-        investors: project.investorlist.map(investor => investor.investorname).join(', ')}));
-    } else {
-      return [];
-    }
-  });
-
+  const allProjects = responses[0].data.map(project => ({
+    id: project.projectcode,
+    amount: project.fundamount,
+    project: project.projectname,
+    date: project.funddate,
+    count: project.investorcount,
+    logo: project.logo,
+    stage: project.fundstagename,
+    categories: project.categorylist.map(category => category.name).join(', '),
+    investors: project.investorlist.map(investor => investor.investorname).join(', ')
+  }));
+  
   // for total_pages, use the total count from the first response
-  const total_pages = Math.ceil(responses[0].recordsfiltered / (ITEMS_PER_PAGE ));
+  const total_pages = responses[0].totalPages ;
   return { projects: allProjects, total_pages };
 }
 
