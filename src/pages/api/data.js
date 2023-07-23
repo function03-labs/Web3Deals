@@ -47,7 +47,15 @@ export default async function handler(req, res) {
     };
 
     // Add additional filters to the query if the corresponding query parameters are provided
-    if (fundstagename) query.fundstagename = fundstagename;
+    if (fundstagename) {
+      if (fundstagename.toLowerCase() === 'undisclosed') {
+          query.fundstagecode = 'unknown';
+      } else if (fundstagename.toLowerCase() === 'crowdfunding') {
+          query.fundstagecode = 'equity-crowdfunding';
+      } else {
+          query.fundstagecode = fundstagename.toLowerCase();
+      }
+  }
     if (category) query.categorylist = { $elemMatch: { code: category } };
     if (projectname)
       query.projectname = { $regex: projectname, $options: 'i' }; // Perform a case-insensitive search

@@ -4,8 +4,6 @@ import { DataTable } from "./data-table"
 import { useRouter } from "next/router";
 import { isEqual } from "lodash";
 
-const ITEMS_PER_PAGE = 40; // Define how many items you want to fetch per API call
-
 async function getData(query, pageIndex = 0): Promise<{ projects: Project[], total_pages: number }> {
   const start = pageIndex ; // adjust start to fetch two "pages" at once
   const sortParts = query.sort ? query.sort.split(".") : [];
@@ -28,7 +26,6 @@ async function getData(query, pageIndex = 0): Promise<{ projects: Project[], tot
 
   // fetch two "pages" of data
   const responses = await Promise.all([fetchPage(start)]);
-  console.log(responses[0].data)
   
   // combine the project data from both responses
   const allProjects = responses[0].data.map(project => ({
@@ -42,7 +39,7 @@ async function getData(query, pageIndex = 0): Promise<{ projects: Project[], tot
     categories: project.categorylist.map(category => category.name).join(', '),
     investors: project.investorlist.map(investor => investor.investorname).join(', ')
   }));
-  
+
   // for total_pages, use the total count from the first response
   const total_pages = responses[0].totalPages ;
   return { projects: allProjects, total_pages };
