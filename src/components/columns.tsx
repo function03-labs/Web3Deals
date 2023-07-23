@@ -59,7 +59,7 @@ export const columns: ColumnDef<Project>[] = [
       )
     },
     cell: ({ row }) => {
-      return <div className=" text-start font-medium">{row.getValue("amount") ? '$'+formatAmount(parseInt(row.getValue("amount"))): '--'}</div>
+      return <div className=" text-start font-normal">{row.getValue("amount") ? '$'+formatAmount(parseInt(row.getValue("amount"))): '--'}</div>
     },
   },
   {

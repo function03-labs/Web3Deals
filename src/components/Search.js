@@ -175,7 +175,7 @@ function Search({theme}) {
   };
   
   return (
-    <div className="flex  flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-3 md:mx-8 mt-2 md:mt-0">
+    <div className="flex  flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-3 md:mx-4 mt-2 md:mt-0">
       <Select
         styles={customStyles}
         options={categoryOptions}
@@ -183,7 +183,7 @@ function Search({theme}) {
         onChange={handleCategoryChange}
         isClearable
         placeholder="Category"
-        className="w-full sm:w-auto"
+        className="w-full sm:w-auto rounded-md"
         components={{
           DropdownIndicator,
         }}
