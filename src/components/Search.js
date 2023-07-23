@@ -177,6 +177,7 @@ function Search({theme}) {
   return (
     <div className="flex  flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-3 md:mx-8 mt-2 md:mt-0">
       <Select
+        id="cat"
         styles={customStyles}
         options={categoryOptions}
         value={category}
@@ -189,6 +190,7 @@ function Search({theme}) {
         }}
       />
       <Select
+        id="round"
         styles={customStyles}
         options={roundOptions}
         value={round}
@@ -201,6 +203,7 @@ function Search({theme}) {
         }}
       />
       <Select
+        id="amount"
         styles={customStyles}
         options={amountOptions}
         value={amount}
@@ -213,6 +216,7 @@ function Search({theme}) {
         }}
       />
       <Select
+        id="years"
         styles={customStyles}
         options={years}
         value={date}
