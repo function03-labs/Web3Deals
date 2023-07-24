@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     const sortOrder = req.query.sortOrder === 'asc' ? 1 : -1;
 
     // Set the number of documents to display per page
-    const documentsPerPage = 40;
+    const documentsPerPage = 10;
 
     // Calculate the number of documents to skip based on the current page
     const skip = (parseInt(page, 10) - 1) * documentsPerPage;
