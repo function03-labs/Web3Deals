@@ -101,7 +101,7 @@ function Search({theme}) {
       fontSize: '0.875rem',
       transition: 'background-color 0.5s, color 0.5s', // Added transition
     }),
-    option: (base, { isFocused, isSelected }) => ({
+    option: (base, { isFocused, isSelected,  isHovered }) => ({
       ...base,
       fontSize: '0.875rem',
       cursor: 'pointer',
@@ -109,6 +109,9 @@ function Search({theme}) {
       color: theme === 'dark' ? 'white' : 'black',
       whiteSpace: 'nowrap',
       transition: 'background-color 0.5s, color 0.5s', // Added transition
+      '&:hover': {
+        backgroundColor: 'lightgray'
+      },
     }),
     menu: base => ({
       ...base,
