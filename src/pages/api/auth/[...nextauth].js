@@ -9,15 +9,10 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
-  callbacks: {
-    session: ({ session, token }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: token.sub,
-      },
-    }),
-  },
+  pages:{
+    signIn: "/signin"
+  }
+  
 };
 
 export default NextAuth(authOptions);
