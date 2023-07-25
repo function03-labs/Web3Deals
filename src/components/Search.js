@@ -105,12 +105,12 @@ function Search({theme}) {
       ...base,
       fontSize: '0.875rem',
       cursor: 'pointer',
-      backgroundColor: isSelected ? '#6B7280' : (theme === 'dark' ? 'black' : 'white'),
+      backgroundColor: isSelected ? (theme === 'dark' ? '#1F2937' : '#E5E7EB') : (theme === 'dark' ? 'black' : 'white'),
       color: theme === 'dark' ? 'white' : 'black',
       whiteSpace: 'nowrap',
       transition: 'background-color 0.5s, color 0.5s', // Added transition
       '&:hover': {
-        backgroundColor: '#6B7280'
+        backgroundColor: (theme === 'dark' ? '#1F2937' : '#E5E7EB'),
       },
     }),
     menu: base => ({

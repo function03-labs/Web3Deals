@@ -1,10 +1,11 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import '../app/globals.css'
 import Head from 'next/head';
+import {SessionProvider } from "next-auth/react"
 
 const MyApp = ({ Component, pageProps }) => {
   return (
-    <>
+    <SessionProvider session={pageProps.session}>
     <Head>
       <title>Web3Deals</title>
       <meta name="description" content="Find the best deals in the web3 space." />
@@ -19,8 +20,8 @@ const MyApp = ({ Component, pageProps }) => {
       <link  href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;400;500;600;700&display=swap" rel="stylesheet"/>
       <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
     </Head>
-    <Component {...pageProps} />
-    </>
+      <Component {...pageProps} />
+    </SessionProvider>
   )
 }
 

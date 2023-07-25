@@ -47,7 +47,7 @@ function Header({theme, setTheme}) {
     <header className="z-20 ease-linear  flex flex-col md:flex-row justify-between items-center py-2 sm:py-3 md:py-3 lg:px-[12rem] md:px-[8rem] border-b-2 border-[#F2F2F2]">
       <h1  className="cursor-pointer text-2xl font-bold tracking-widest">.Web3Deals</h1>
       <nav className=" items-center space-x-2 pt-1 flex">
-        <button onClick={()=>Router.push('/subscription')} className='border rounded-full px-2 py-1'>Investor Portal</button>
+        
           <a target="_blank" rel="noreferrer" href="https://github.com/function03-labs/Web3Deals">
             <div className="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md w-9 px-0">
               <svg viewBox="0 0 438.549 438.549" className="h-5 w-5">
@@ -65,6 +65,7 @@ function Header({theme, setTheme}) {
         <div onClick={toggleTheme} className="cursor-pointer transition-all">
           {theme === 'light' ? <SunIcon/>:<MoonIcon/>}
          </div>
+         <div onClick={()=>Router.push('/subscription')} className='cursor-pointer inline-flex items-center justify-center text-sm font-medium transition-colors h-9 rounded-md w-9 px-0' ><svg width="24" height="24" viewBox="0 0 0.48 0.48" xmlns="http://www.w3.org/2000/svg"><path d="M.48.24a.24.24 0 1 0-.394.184l.013.01.007.005A.239.239 0 0 0 .24.48.239.239 0 0 0 .374.439L.381.434l.013-.01.001-.001A.244.244 0 0 0 .479.24zM.24.45A.206.206 0 0 1 .12.412L.122.401a.125.125 0 0 1 .012-.03.143.143 0 0 1 .043-.043.148.148 0 0 1 .029-.012A.124.124 0 0 1 .24.31a.126.126 0 0 1 .088.035.116.116 0 0 1 .033.066A.211.211 0 0 1 .24.45zM.167.228A.075.075 0 0 1 .161.197c0-.011.002-.021.006-.031A.074.074 0 0 1 .184.141.085.085 0 0 1 .209.124a.081.081 0 0 1 .087.017.085.085 0 0 1 .017.025.081.081 0 0 1 0 .062.085.085 0 0 1-.017.025.085.085 0 0 1-.025.017.081.081 0 0 1-.062 0A.085.085 0 0 1 .184.253.076.076 0 0 1 .167.228zM.39.387V.385A.157.157 0 0 0 .369.343.146.146 0 0 0 .336.309.156.156 0 0 0 .305.291.085.085 0 0 0 .319.28.126.126 0 0 0 .338.256.109.109 0 0 0 .354.198.111.111 0 0 0 .345.154.114.114 0 0 0 .321.118.115.115 0 0 0 .285.094.112.112 0 0 0 .241.085a.112.112 0 0 0-.044.009.109.109 0 0 0-.036.024.115.115 0 0 0-.024.036.111.111 0 0 0-.009.044c0 .011.001.021.004.03.003.01.007.019.012.028.005.009.012.016.019.024a.076.076 0 0 0 .014.011.154.154 0 0 0-.031.019.177.177 0 0 0-.033.034.15.15 0 0 0-.021.042v.002A.21.21 0 1 1 .45.24a.209.209 0 0 1-.061.147z" fill='currentColor' /></svg></div>
       </nav>  
     </header>
   );

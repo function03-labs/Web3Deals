@@ -146,7 +146,7 @@ export function DataTable<TData, TValue>({
             )
             .map((column) => {
               return (
-                <div className="hover:bg-gray-500"><DropdownMenuCheckboxItem
+                <div className="hover:bg-gray-100 dark:hover:bg-gray-800"><DropdownMenuCheckboxItem
                   key={column.id}
                   className="capitalize cursor-pointer"
                   checked={column.getIsVisible()}
