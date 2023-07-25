@@ -49,7 +49,7 @@ const CardFeed = ({theme}) => {
           <div>
             <p className="text-lg font-semibold mb-1">{(data.topCategories[0]._id === 'Others' ? 'Misc.' : data.topCategories[0]._id) + ' - $' + formatAmount(parseInt(data.topCategories[0].sum))+' ('+formatAmountForPercentage(parseInt(data.totalFundAmount), parseInt(data.topCategories[0].sum)) + '%)'}</p>
             <p className="text-sm font-medium text-gray-500 mb-2">{(data.topCategories[1]._id === 'Others' ? 'Misc.' : data.topCategories[1]._id) + ' - $'+formatAmount(parseInt(data.topCategories[1].sum))+' ('+formatAmountForPercentage(parseInt(data.totalFundAmount), parseInt(data.topCategories[1].sum)) + '%)'}</p>
-            <p className="text-xs font-medium text-gray-500 whitespace-nowrap">{(data.topCategories[2]._id === 'Others' ? 'Misc.' : data.topCategories[2]._id) + ' - $'+formatAmount(parseInt(data.topCategories[2].sum))+' ('+formatAmountForPercentage(parseInt(data.totalFundAmount), parseInt(data.topCategories[2].sum)) + '%)'}</p>
+            <p className="text-xs font-medium text-gray-500">{(data.topCategories[2]._id === 'Others' ? 'Misc.' : data.topCategories[2]._id) + ' - $'+formatAmount(parseInt(data.topCategories[2].sum))+' ('+formatAmountForPercentage(parseInt(data.totalFundAmount), parseInt(data.topCategories[2].sum)) + '%)'}</p>
           </div>
         },          
         {
