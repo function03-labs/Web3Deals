@@ -2,8 +2,47 @@ import Button from '@/components/Button'
 import GoogleSignInButton from '@/components/GoogleSignInButton'
 import TextField from '@/components/TextField'
 import Link from 'next/link'
+import { useState } from 'react'
+import { getAuth, sendSignInLinkToEmail } from "firebase/auth";
 
 const SignInPage = () => {
+
+  // Set up state variable for email input
+  const [email, setEmail] = useState("");
+
+  // Set up actionCodeSettings
+  const actionCodeSettings = {
+    url: 'https://localhost:3000',
+    handleCodeInApp: true,
+    iOS: {
+      bundleId: 'https://localhost:3000'
+    },
+    android: {
+      packageName: 'https://localhost:3000',
+      installApp: true,
+      minimumVersion: '12'
+    },
+    dynamicLinkDomain: 'https://localhost:3000'
+  };
+
+  // Handle form submit
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+
+    const auth = getAuth();
+
+    // Send sign-in link to email
+    sendSignInLinkToEmail(auth, email, actionCodeSettings)
+      .then(() => {
+        localStorage.setItem('emailForSignIn', email);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // handle the error here
+      });
+  }
+
   return (
     <section className='flex flex-col md:flex-row min-h-screen overflow-hidden py-4 md:py-28 bg-white relative'>
         <Link href="/">
@@ -26,6 +65,8 @@ const SignInPage = () => {
                 placeholder='hello@me.com'
                 autoComplete='email'
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <Button
@@ -33,6 +74,7 @@ const SignInPage = () => {
               variant='outline'
               color='gray'
               className='mt-3 w-full'
+              onClick={handleFormSubmit}
             >
               Continue with Email
             </Button>

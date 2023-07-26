@@ -2,6 +2,7 @@ import { useEffect, useCallback, useState } from "react";
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Search from "@/components/Search";
+import debounce from "lodash/debounce";
 import {ColumnDef, ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreRowModel, getPaginationRowModel, getFilteredRowModel, getSortedRowModel, useReactTable} from "@tanstack/react-table"
 import {DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "./ui/table"
@@ -80,14 +81,22 @@ export function DataTable<TData, TValue>({
     }
   }, [searchTerm])
 
-  // Update search parameter when search field value changes
-  const updateSearchValue = (value: string) => {
-    if (value.length > 2 || value=="") {
+  const debouncedUpdateUrl = useCallback(
+    debounce((value) => {
       router.push(
         `${pathname}?${createQueryString({
           search: value,
         })}`
-      );}
+      );
+    }, 1000), // wait 500ms after the last invocation before calling the function
+    [pathname, createQueryString, router]
+  );
+  
+
+  // Update search parameter when search field value changes
+  const updateSearchValue = (value: string) => {
+    if (value.length > 2 || value=="") {
+      debouncedUpdateUrl(value);}
       table.getColumn("project")?.setFilterValue(value);
   }
  
@@ -111,7 +120,7 @@ export function DataTable<TData, TValue>({
   })
 
   useEffect(() => {
-    table.setPageSize(40);
+    table.setPageSize(10);
   }, []);
   
   return (
@@ -119,7 +128,7 @@ export function DataTable<TData, TValue>({
   <div className="flex flex-wrap items-center pb-2">
     <div className="w-full sm:w-auto mb-2 sm:mb-0">
       <Input
-      id='myInput'
+        id='myInput'
         placeholder="Filter Projects..."
         value={(table.getColumn("project")?.getFilterValue() as string) ?? ""}
         className={theme ==='light' ? "border text-gray-500 border-gray-200 p-2":"border border-gray-400 text-gray-400 p-2" }

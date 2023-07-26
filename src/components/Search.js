@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState,useEffect,memo } from 'react';
 import { useRouter } from 'next/router';
 import Select,{components} from 'react-select';
 import { PlusCircleIcon } from 'lucide-react';
@@ -235,4 +235,4 @@ function Search({theme}) {
   );
 }
 
-export default Search;
+export default memo(Search);
