@@ -221,7 +221,7 @@ function Search({theme}) {
           DropdownIndicator,
         }}
       />
-      <Select
+      {/*<Select
         id="years"
         styles={customStyles}
         options={years}
@@ -233,7 +233,7 @@ function Search({theme}) {
         components={{
           DropdownIndicator,
         }}
-      />
+      />*/}
     </div>
   );
 }

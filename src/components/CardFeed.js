@@ -1,6 +1,7 @@
 import { useState,useEffect} from 'react';
 import Card from '@/components/Card';
 import Select from 'react-select';
+import { useRouter } from 'next/router';
 
 async function fetchStats(timeframe) {
   const res = await fetch(`/api/stats?timeframe=${timeframe.value}`);
@@ -29,8 +30,38 @@ const Options = [
   { value:'all', label: 'All Time'}]
 
 const CardFeed = ({theme}) => {
+  const Router = useRouter();
   const [timeframe, setTimeframe] = useState(Options[0]);
   const [stats, setStats] = useState([]); 
+
+
+  const updateURL = (newQuery) => {
+    for(let key in newQuery) {
+      if(newQuery[key] === undefined) {
+        delete newQuery[key];
+      }
+    }
+
+    Router.push({
+      pathname: '/',
+      query: newQuery,
+    });
+  };
+
+  useEffect(()=>{
+
+    let newQueryParams = { ...Router.query };
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+    const oneDay = 1000 * 60 * 60 * 24;
+    const dayOfYear = Math.floor(diff / oneDay);
+    const currentWeek = Math.ceil(dayOfYear / 7);
+
+    // Add the 'week' parameter
+    newQueryParams.week = currentWeek;
+    updateURL(newQueryParams);
+  },[])
 
   useEffect(() => {
     fetchStats(timeframe) 
@@ -78,9 +109,49 @@ const CardFeed = ({theme}) => {
       });
   }, [timeframe]);
 
+
   const handleTimeframeChange = (e) => {
     setTimeframe(e);
+    console.log(e);
+  
+    // Copy existing query parameters
+    let newQueryParams = { ...Router.query };
+  
+    // Remove existing time-related parameters
+    delete newQueryParams.week;
+    delete newQueryParams.month;
+    delete newQueryParams.date;
+  
+    if (e.value === 'week') {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 0);
+      const diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+      const oneDay = 1000 * 60 * 60 * 24;
+      const dayOfYear = Math.floor(diff / oneDay);
+      const currentWeek = Math.ceil(dayOfYear / 7);
+  
+      // Add the 'week' parameter
+      newQueryParams.week = currentWeek;
+    }
+  
+    if (e.value === 'month') {
+      const currentMonth = new Date().getMonth();
+  
+      // Add the 'month' parameter
+      newQueryParams.month = currentMonth;
+    }
+  
+    if (e.value === 'year') {
+      const currentYear = new Date().getFullYear();
+  
+      // Add the 'year' parameter
+      newQueryParams.date = currentYear;
+    }
+  
+    // Update the URL with the new query parameters
+    updateURL(newQueryParams);
   };
+  
 
   const customStyles = {
     control: (base, state) => ({

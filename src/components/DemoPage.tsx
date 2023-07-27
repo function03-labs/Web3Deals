@@ -17,6 +17,8 @@ async function getData(query, pageIndex = 0): Promise<{ projects: Project[], tot
     if (query.amount) apiUrl += `&fundRange=${query.amount}`;
     if (query.stage) apiUrl += `&fundstagename=${query.stage}`;
     if (query.date) apiUrl += `&year=${query.date}`;
+    if (query.month) apiUrl += `&month=${query.month}`;
+    if (query.week) apiUrl += `&week=${query.week}`;
     if (query.search) apiUrl += `&projectname=${encodeURIComponent(query.search)}`;
     if (sortField) apiUrl += `&sortField=${sortField}`;
     if (sortOrder) apiUrl += `&sortOrder=${sortOrder}`;

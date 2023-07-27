@@ -1,5 +1,14 @@
 import connectDatabase, { Fundraising } from '../../db';
 
+function getWeekRange(year, week) {
+  const date = new Date(year, 0, 1 + (week - 1) * 7);
+  const startOfWeek = new Date(date.setDate(date.getDate() - date.getDay()));
+  const endOfWeek = new Date(startOfWeek);
+  endOfWeek.setDate(endOfWeek.getDate() + 6);
+
+  return [startOfWeek.getTime() / 1000, endOfWeek.getTime() / 1000];
+}
+
 // The function handles incoming HTTP requests
 export default async function handler(req, res) {
   // Check if the request method is GET
@@ -13,6 +22,8 @@ export default async function handler(req, res) {
       category = '',
       fundRange = '',
       year,
+      month,
+      week,
       projectname = '',
     } = req.query;
 
@@ -63,6 +74,19 @@ export default async function handler(req, res) {
       const startOfYear = new Date(year, 0, 1).getTime() / 1000; // beginning of the year
       const endOfYear = new Date(year, 11, 31, 23, 59, 59).getTime() / 1000; // end of the year
       query.funddate = { $gte: startOfYear, $lt: endOfYear }; // Filter by the funddate field
+    }
+
+    if (month) {
+      const currentyear = new Date().getFullYear();
+      const startOfMonth = new Date(currentyear, month, 1).getTime() / 1000;
+      const endOfMonth = new Date(currentyear, month + 1, 0, 23, 59, 59).getTime() / 1000;
+      query.funddate = { $gte: startOfMonth, $lt: endOfMonth };
+    }
+
+    if (week) {
+      const currentyear = new Date().getFullYear();
+      const [startOfWeek, endOfWeek] = getWeekRange(currentyear, week);
+      query.funddate = { $gte: startOfWeek, $lt: endOfWeek };
     }
 
     // Specify the sorting order
