@@ -87,10 +87,11 @@ function Search({theme}) {
   const customStyles = {
     control: (base, state) => ({
       ...base,
-      border: state.isFocused ?  (theme === 'dark' ? '1.5px dashed white' : '1.5px dashed black')  : '1.5px dashed lightgray',
+      border: state.isFocused ?  (theme === 'dark' ? '1.5px solid white' : '1.5px solid black')  : '1.5px dashed gray',
       boxShadow: 'none',
       borderRadius: 0,
       minWidth: '100px',
+      borderRadius: 3,
       overflow:'hidden',
       whiteSpace: 'nowrap',
       '&:hover': {
@@ -115,6 +116,8 @@ function Search({theme}) {
     }),
     menu: base => ({
       ...base,
+      borderRadius: 3,
+      border : theme === 'dark' ? '1.5px solid white' : '1.5px solid black',
       boxShadow: theme === 'dark' ? '-9px 11px 13px -9px rgba(0,0,0,0.5)' : '-9px 11px 13px -9px rgba(0,0,0,0.16)',
       padding : '0.25rem',
       borderRadius: 'none',

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import {signIn,signOut,useSession} from 'next-auth/react'
 
+
 function SunIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" aria-hidden="true">
@@ -26,7 +27,6 @@ function Header({theme, setTheme}) {
   const Router= useRouter()
   const {data: session}= useSession()
   
-
   useEffect(() => {
     // Set the theme based on the value stored in localStorage
     document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'));
@@ -47,9 +47,9 @@ function Header({theme, setTheme}) {
   };
 
   return (
-    <header className="z-20 ease-linear  flex flex-col md:flex-row justify-between items-center py-2 sm:py-3 md:py-3 lg:px-[12rem] md:px-[8rem] border-b-2 border-[#F2F2F2]">
+    <header className="z-20 ease-linear flex flex-col md:flex-row justify-between items-center py-2 sm:py-3 md:py-3 md:px-[8rem] border-b border-[#F2F2F2]">
       <h1  className="cursor-pointer text-2xl font-bold tracking-widest">.Web3Deals</h1>
-      <nav className=" items-center space-x-2 pt-1 flex">
+      <nav className=" items-center space-x-2.5 pt-1 flex">
         
           <a target="_blank" rel="noreferrer" href="https://github.com/function03-labs/Web3Deals">
             <div className="inline-flex items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md w-9 px-0">
@@ -69,7 +69,7 @@ function Header({theme, setTheme}) {
           {theme === 'light' ? <SunIcon/>:<MoonIcon/>}
          </div>
          <div onClick={!session ? signIn : signOut} className='cursor-pointer inline-flex items-center justify-center text-sm font-medium transition-colors h-9 rounded-md w-9 px-0' >
-         {session ? <img width="24" height="24" className='rounded-full' src={session.user.image} alt=""/>:<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 0.72 0.72"><path d="M.36.06a.3.3 0 1 0 0 .6.3.3 0 0 0 0-.6zm0 .09c.05 0 .09.04.09.09S.41.33.36.33.27.29.27.24.31.15.36.15zm0 .426A.216.216 0 0 1 .18.479C.181.419.3.387.36.387S.539.42.54.479a.216.216 0 0 1-.18.097z" fill="currentColor" /></svg>}</div>
+         {session ? <img width="24" loading='lazy' height="24" className='rounded-full' src={session.user.image} alt=""/>:<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 0.72 0.72"><path d="M.36.06a.3.3 0 1 0 0 .6.3.3 0 0 0 0-.6zm0 .09c.05 0 .09.04.09.09S.41.33.36.33.27.29.27.24.31.15.36.15zm0 .426A.216.216 0 0 1 .18.479C.181.419.3.387.36.387S.539.42.54.479a.216.216 0 0 1-.18.097z" fill="currentColor" /></svg>}</div>
       </nav>  
     </header>
   );

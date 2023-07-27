@@ -25,6 +25,7 @@
   transition: all .5s ease;
 }
 body, select {
+  overflow-x: hidden;
   background-color: var(--color-bg);
   color: var(--color-text);
   transition: all .5s ease;

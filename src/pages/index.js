@@ -10,7 +10,7 @@ export default function Home() {
     <div>
       <Header theme={theme} setTheme={setTheme} />
       <main className="relative">
-        <div className="lg:px-32 md:px-26 sm:px-12">
+        <div className="lg:px-32 md:px-22 sm:px-12">
           <CardFeed theme={theme} />
           <DemoPage theme={theme} />
         </div>

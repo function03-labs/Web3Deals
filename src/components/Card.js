@@ -19,7 +19,7 @@ const Card = ({ title, icon, mainStat, comparisonStat, theme }) => {
     };
 
   return (
-    <div className={`card p-4 border-[1px] ${themeColors.bg} ${themeColors.border} rounded-lg shadow-md`}>
+    <div className={`card p-4 pb-3 border ${themeColors.bg} ${themeColors.border} rounded shadow-md`}>
       <div className={`card-header flex flex-row items-center justify-between space-y-2 pb-4 border-b-2`}>
         <div className={`card-title text-lg font-bold ${themeColors.title}`}>
           {title}

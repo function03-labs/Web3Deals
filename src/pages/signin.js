@@ -2,38 +2,49 @@ import Button from '@/components/Button'
 import GoogleSignInButton from '@/components/GoogleSignInButton'
 import TextField from '@/components/TextField'
 import Link from 'next/link'
-import { useState } from 'react'
-import { getAuth, sendSignInLinkToEmail } from "firebase/auth";
+import { useState,useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { sendSignInLinkToEmail } from "firebase/auth";
+import {auth} from '../../firebase'
+import { isSignInWithEmailLink, signInWithEmailLink } from "firebase/auth";
 
 const SignInPage = () => {
+  const router=useRouter();
+
+  useEffect(() => {
+    if (isSignInWithEmailLink(auth, window.location.href)) {
+      let email = window.localStorage.getItem('emailForSignIn');
+      if (!email) {
+        // TODO: Handle case where email is not in local storage
+        email = window.prompt('Please provide your email for confirmation');
+      }
+      signInWithEmailLink(auth, email, window.location.href)
+        .then((result) => {
+          window.localStorage.removeItem('emailForSignIn');
+          router.push('/');
+          
+        })
+        .catch((error) => {
+          // TODO: Display error to user
+        });
+    }
+  }, []);
 
   // Set up state variable for email input
   const [email, setEmail] = useState("");
 
   // Set up actionCodeSettings
   const actionCodeSettings = {
-    url: 'https://localhost:3000',
+    url: 'http://localhost:3000/signin',
     handleCodeInApp: true,
-    iOS: {
-      bundleId: 'https://localhost:3000'
-    },
-    android: {
-      packageName: 'https://localhost:3000',
-      installApp: true,
-      minimumVersion: '12'
-    },
-    dynamicLinkDomain: 'https://localhost:3000'
   };
 
   // Handle form submit
   const handleFormSubmit = (event) => {
     event.preventDefault();
-
-    const auth = getAuth();
-
-    // Send sign-in link to email
     sendSignInLinkToEmail(auth, email, actionCodeSettings)
       .then(() => {
+        console.log(email);
         localStorage.setItem('emailForSignIn', email);
       })
       .catch((error) => {
