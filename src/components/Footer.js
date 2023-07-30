@@ -1,24 +1,18 @@
 import { ChevronDoubleUpIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
 
-/*
- * Footer component for the website.
- * Renders 2023 .Web3Deals All rights reserved.
- */
 function Footer() {
     const Router = useRouter();
     return (
-      <footer className="py-4 md:py-6 px-[8rem] w-full relative border-t-2 border-[#F2F2F2]">
-        <button id="scroll-top" aria-label="scroll-top" onClick={() => {window.scrollTo({ top: 0, behavior: 'smooth' });}} className="absolute -top-12 right-6 z-10 w-min md:mt-0 hidden sm:block text-[#BDBDBD] hover:text-gray-500 focus:outline-none">
-            <ChevronDoubleUpIcon className="h-9"/>
-        </button>
+      <footer className="flex flex-col py-6  px-[8rem] w-full  border-t-2 border-[#F2F2F2]">
+        
         <div className="w-full  flex flex-col md:flex-row items-center justify-between px-2">
             <div className="text-center md:text-left">
                 <h1 onClick={() => { Router.push("/") }} className="cursor-pointer text-2xl font-bold tracking-widest">.Web3Deals</h1>
                 <p className="text-gray-600 mt-1 text-sm hidden md:inline-block"> An open aggregator aimed at creating an accessible and transparent <br/> platform for the latest developments in the Web3 space, focusing <br/> primarily on raises, fundings, and investments.</p>
                 <p className="text-gray-600 mt-2 text-sm whitespace-nowrap">&copy; {new Date().getFullYear()} Web3Deals.tn All rights reserved.</p>
             </div>
-            <div className="mt-4 md:mt-0 flex space-x-8 md:space-x-12 tracking-wide">
+            <div className="mt-4 md:mt-0 flex gap-5 md:space-x-12 tracking-wide items-start">
                 <div>
                     <h2 className="font-semibold mb-1">About Web3Deals</h2>
                     <ul className="flex flex-col space-y-1">
@@ -58,7 +52,11 @@ function Footer() {
                         </li>
                     </ul>
                 </div> 
+                <button id="scroll-top" aria-label="scroll-top" onClick={() => {window.scrollTo({ top: 0, behavior: 'smooth' });}} className=" pt-2 w-min hidden sm:block text-[#BDBDBD] hover:text-gray-500 focus:outline-none">
+            <ChevronDoubleUpIcon className="h-9"/>
+        </button>
             </div>
+            
         </div>
     </footer>
     );

@@ -9,6 +9,13 @@ function getWeekRange(year, week) {
   return [startOfWeek.getTime() / 1000, endOfWeek.getTime() / 1000];
 }
 
+function getPastDaysTimestamp(days) {
+  const pastDate = new Date();
+  pastDate.setDate(pastDate.getDate() - days);
+  return pastDate.getTime() / 1000;
+}
+
+
 // The function handles incoming HTTP requests
 export default async function handler(req, res) {
   // Check if the request method is GET
@@ -34,7 +41,7 @@ export default async function handler(req, res) {
     const sortOrder = req.query.sortOrder === 'asc' ? 1 : -1;
 
     // Set the number of documents to display per page
-    const documentsPerPage = 10;
+    const documentsPerPage = 15;
 
     // Calculate the number of documents to skip based on the current page
     const skip = (parseInt(page, 10) - 1) * documentsPerPage;
@@ -84,9 +91,10 @@ export default async function handler(req, res) {
     }
 
     if (week) {
-      const currentyear = new Date().getFullYear();
-      const [startOfWeek, endOfWeek] = getWeekRange(currentyear, week);
-      query.funddate = { $gte: startOfWeek, $lt: endOfWeek };
+      // Generate timestamp for the past 7 days
+    const pastWeekTimestamp = getPastDaysTimestamp(7);
+    const currentTimestamp = Date.now() / 1000;
+    query.funddate = { $gte: pastWeekTimestamp, $lt: currentTimestamp };
     }
 
     // Specify the sorting order

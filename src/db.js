@@ -60,6 +60,13 @@ const projectSchema = new mongoose.Schema({
   valulation: Number,
 });
 
+const fundraisingInfoSchema = new mongoose.Schema({
+  logo_img_src: String,
+  fundraising_name: String,
+  funds_info: String,
+  projects_info: String,
+});
+
 // Declare the "Fundraising" model using the schema
 let Fundraising;
 try {
@@ -69,5 +76,13 @@ try {
   Fundraising = mongoose.model('Fundraising', projectSchema, 'fundraising');
 }
 
+let FundraisingInfo;
+try {
+  FundraisingInfo = mongoose.model('FundraisingInfo');
+} catch (error) {
+  // If the model doesn't exist, create a new one
+  FundraisingInfo = mongoose.model('FundraisingInfo', fundraisingInfoSchema, 'fundraising_info');
+}
+
 // Export the "Fundraising" model to be used in other parts of the application
-export { Fundraising };
+export { Fundraising,FundraisingInfo };

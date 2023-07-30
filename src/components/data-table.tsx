@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Search from "@/components/Search";
 import debounce from "lodash/debounce";
+import Modal from 'react-modal';
 import {ColumnDef, ColumnFiltersState, SortingState, VisibilityState, flexRender, getCoreRowModel, getPaginationRowModel, getFilteredRowModel, getSortedRowModel, useReactTable} from "@tanstack/react-table"
 import {DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "./ui/table"
@@ -25,6 +26,8 @@ export function DataTable<TData, TValue>({
   pageCount,
   theme
 }: DataTableProps<TData, TValue>) {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [projectDetails, setProjectDetails] = useState({});
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -91,7 +94,36 @@ export function DataTable<TData, TValue>({
     }, 1000), // wait 500ms after the last invocation before calling the function
     [pathname, createQueryString, router]
   );
+
+  async function fetchProjectDetails(name) {
+    try {
+      // Send a GET request to the API endpoint
+      const response = await fetch(`/api/info?name=${name}`);
   
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      // Parse the JSON response
+      const data = await response.json();
+  
+      // Store the data in state variable and open the modal
+      setProjectDetails(data);
+      setModalIsOpen(true);
+    } catch (error) {
+      console.error('Failed to fetch project details:', error);
+    }
+  }
+
+  function closeModal() {
+    setModalIsOpen(false);
+  }
+  
+  const handleRowClick = (rowData) => {
+    console.log("Row Clicked:", rowData);
+    fetchProjectDetails(rowData.project + ' - '  + rowData.stage );
+    // Do whatever you want with the clicked row data here...
+  };
 
   // Update search parameter when search field value changes
   const updateSearchValue = (value: string) => {
@@ -120,7 +152,7 @@ export function DataTable<TData, TValue>({
   })
 
   useEffect(() => {
-    table.setPageSize(10);
+    table.setPageSize(15);
   }, []);
   
   return (
@@ -199,7 +231,8 @@ export function DataTable<TData, TValue>({
             <TableRow
               key={row.id}
               data-state={row.getIsSelected() && "selected"}
-              className="text-gray-900 hover:bg-gray-100 transition-colors duration-200 dark:hover:bg-gray-800 dark:text-gray-100"
+              onClick={() => handleRowClick(row.original)}
+              className="text-gray-900 cursor-pointer hover:bg-gray-100 transition-colors duration-200 dark:hover:bg-gray-800 dark:text-gray-100"
             >
               {row.getVisibleCells().map((cell) => (
                 <TableCell key={cell.id} className="text-start">
@@ -262,6 +295,28 @@ export function DataTable<TData, TValue>({
       </Button>
     </div>
   </div>
+  <Modal
+  className=" z-20 h-fit w-4/5 m-auto mt-[400px]"
+  isOpen={modalIsOpen}
+  onRequestClose={closeModal}
+  contentLabel="Project Details Modal"
+>
+  {projectDetails && (
+    <div className="bg-white dark:bg-black border dark:border-gray-200 border-black text-black dark:text-white  p-4 rounded">
+      <div className="flex items-center space-x-4 mb-3">
+      <img width={42} height={42} className="rounded" src={projectDetails.logo_img_src} alt="Project Logo" />
+      <h2>{projectDetails.fundraising_name}</h2>
+      </div>
+      <h2 className="flex items-center gap-2 font-bold">Fund's Details :</h2>
+      <p className="mb-2">{projectDetails.funds_info}</p>
+      <h2 className="flex items-center gap-2 font-bold"><svg width="18" height="18" viewBox="0 0 0.96 0.96" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M0.48 0c0.265 0 0.48 0.215 0.48 0.48s-0.215 0.48 -0.48 0.48S0 0.745 0 0.48 0.215 0 0.48 0zm0 0.06C0.248 0.06 0.06 0.248 0.06 0.48s0.188 0.42 0.42 0.42 0.42 -0.188 0.42 -0.42S0.712 0.06 0.48 0.06zm0.039 0.555v0.078h-0.078v-0.078zM0.48 0.27a0.12 0.12 0 0 1 0.03 0.236V0.57h-0.06v-0.12h0.03a0.06 0.06 0 1 0 -0.06 -0.065L0.42 0.39h-0.06a0.12 0.12 0 0 1 0.12 -0.12z"/></svg>Project's Details :</h2>
+      <p>{projectDetails.projects_info}</p>
+    </div>
+  )}
+  <Button className="w-full mt-2 rounded sm:w-fit flex-grow sm:flex-grow-0 hover:text-black bg-gray-200 text-black hover:bg-gray-300 transition-colors duration-200"
+      variant="outline"
+      size="sm" onClick={closeModal}>Close</Button>
+</Modal>
 </div>
   )
 }

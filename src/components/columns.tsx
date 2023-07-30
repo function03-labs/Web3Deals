@@ -1,6 +1,8 @@
 import { ColumnDef } from "@tanstack/react-table"
+import { useState } from 'react';
 import { MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Modal from 'react-modal';
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger} from "@/components/ui/dropdown-menu"
 
 // This type is used to define the shape of our data.
@@ -67,8 +69,8 @@ export const columns: ColumnDef<Project>[] = [
     header: "Investors",
     cell: ({ row }) => { 
       return (
-        <div>
-          {row.getValue("investors") ? row.getValue("investors") + ((row.original.count - (row.getValue("investors") as string).split(',').length > 0) ? ' +' + (row.original.count - (row.getValue("investors")as string).split(',').length) : '') : '--'}
+        <div className="line-clamp-1">
+          {row.getValue("investors") ? row.getValue("investors") + ((row.original.count - (row.getValue("investors") as string).split(',').length > 0) ? ' ...':'') : '--'}
         </div>
       );
     },
@@ -94,7 +96,7 @@ export const columns: ColumnDef<Project>[] = [
       </div>;
     },
   },
-  {
+  /*{
     id: "actions",
     cell: ({ row }) => {
       const payment = row.original
@@ -109,11 +111,11 @@ export const columns: ColumnDef<Project>[] = [
           <DropdownMenuContent align="end" className="mytheme">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem className="cursor-pointer" onClick={() => navigator.clipboard.writeText(payment.project)}>
-              Copy projects name
+              Copy Project Name
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )
     },
-  }
+  }*/
 ]

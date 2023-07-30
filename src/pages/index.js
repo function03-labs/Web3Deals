@@ -7,15 +7,16 @@ import DemoPage from '@/components/DemoPage';
 export default function Home() {
   const [theme, setTheme] = useState('light');
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       <Header theme={theme} setTheme={setTheme} />
-      <main className="relative">
+      <main className="relative flex-grow">
         <div className="lg:px-32 md:px-22 sm:px-12">
           <CardFeed theme={theme} />
           <DemoPage theme={theme} />
         </div>
-        <Footer/>
+       
       </main>
+      <Footer/>
     </div>   
   );
 }
