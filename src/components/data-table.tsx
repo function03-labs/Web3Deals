@@ -18,6 +18,14 @@ interface DataTableProps<TData, TValue> {
   theme : string
 }
 
+interface ProjectDetails {
+  logo_img_src: string;
+  fundraising_name: string;
+  funds_info: string;
+  projects_info: string;
+  // Add other properties as needed
+}
+
 export function DataTable<TData, TValue>({
   columns,
   data,
@@ -27,7 +35,7 @@ export function DataTable<TData, TValue>({
   theme
 }: DataTableProps<TData, TValue>) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [projectDetails, setProjectDetails] = useState({});
+  const [projectDetails, setProjectDetails] = useState<ProjectDetails | null>(null)
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -301,7 +309,7 @@ export function DataTable<TData, TValue>({
   onRequestClose={closeModal}
   contentLabel="Project Details Modal"
 >
-  {projectDetails && (
+  {projectDetails &&  (
     <div className="bg-white dark:bg-black border dark:border-gray-200 border-black text-black dark:text-white  p-4 rounded">
       <div className="flex items-center space-x-4 mb-3">
       <img width={42} height={42} className="rounded" src={projectDetails.logo_img_src} alt="Project Logo" />
