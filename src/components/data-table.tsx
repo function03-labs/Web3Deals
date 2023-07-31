@@ -164,7 +164,7 @@ export function DataTable<TData, TValue>({
   }, []);
   
   return (
-    <div>
+    <div className="relative">
   <div className="flex flex-wrap items-center pb-3">
     <div className="w-full sm:w-auto mb-2 sm:mb-0">
       <Input
@@ -304,24 +304,25 @@ export function DataTable<TData, TValue>({
     </div>
   </div>
   <Modal
-  className=" z-20 h-fit w-4/5 m-auto mt-[400px]"
+  className="z-40 h-fit w-4/5 m-auto mt-36"
   isOpen={modalIsOpen}
   onRequestClose={closeModal}
   contentLabel="Project Details Modal"
 >
   {projectDetails &&  (
-    <div className="bg-white dark:bg-black border dark:border-gray-200 border-black text-black dark:text-white  p-4 rounded">
-      <div className="flex items-center space-x-4 mb-3">
-      <img width={42} height={42} className="rounded" src={projectDetails.logo_img_src} alt="Project Logo" />
-      <h2>{projectDetails.fundraising_name}</h2>
+    <div className="bg-white dark:bg-black border dark:border-gray-200 border-black text-black dark:text-white  p-5 rounded">
+      <div className="flex items-center space-x-4 mb-2">
+      <img width={32} height={32} className="rounded" src={projectDetails.logo_img_src} alt="Project Logo" />
+      <h2 className="text-md font-semibold">{projectDetails.fundraising_name}</h2>
       </div>
-      <h2 className="flex items-center gap-2 font-bold">Fund's Details :</h2>
-      <p className="mb-2">{projectDetails.funds_info}</p>
-      <h2 className="flex items-center gap-2 font-bold"><svg width="18" height="18" viewBox="0 0 0.96 0.96" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M0.48 0c0.265 0 0.48 0.215 0.48 0.48s-0.215 0.48 -0.48 0.48S0 0.745 0 0.48 0.215 0 0.48 0zm0 0.06C0.248 0.06 0.06 0.248 0.06 0.48s0.188 0.42 0.42 0.42 0.42 -0.188 0.42 -0.42S0.712 0.06 0.48 0.06zm0.039 0.555v0.078h-0.078v-0.078zM0.48 0.27a0.12 0.12 0 0 1 0.03 0.236V0.57h-0.06v-0.12h0.03a0.06 0.06 0 1 0 -0.06 -0.065L0.42 0.39h-0.06a0.12 0.12 0 0 1 0.12 -0.12z"/></svg>Project's Details :</h2>
-      <p>{projectDetails.projects_info}</p>
+      
+      <h2 className="flex items-center gap-2 font-semibold text-sm mb-1">Fund's Details :</h2>
+      <p className="mb-2 text-sm dark:text-gray-400 text-gray-700">{projectDetails.funds_info}</p>
+      <h2 className="flex items-center gap-2 font-semibold text-sm mb-1"><svg width="18" height="18" viewBox="0 0 0.96 0.96" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M0.48 0c0.265 0 0.48 0.215 0.48 0.48s-0.215 0.48 -0.48 0.48S0 0.745 0 0.48 0.215 0 0.48 0zm0 0.06C0.248 0.06 0.06 0.248 0.06 0.48s0.188 0.42 0.42 0.42 0.42 -0.188 0.42 -0.42S0.712 0.06 0.48 0.06zm0.039 0.555v0.078h-0.078v-0.078zM0.48 0.27a0.12 0.12 0 0 1 0.03 0.236V0.57h-0.06v-0.12h0.03a0.06 0.06 0 1 0 -0.06 -0.065L0.42 0.39h-0.06a0.12 0.12 0 0 1 0.12 -0.12z"/></svg>Project's Details :</h2>
+      <p className="text-sm dark:text-gray-400  text-gray-700">{projectDetails.projects_info}</p>
     </div>
   )}
-  <Button className="w-full mt-2 rounded sm:w-fit flex-grow sm:flex-grow-0 hover:text-black bg-gray-200 text-black hover:bg-gray-300 transition-colors duration-200"
+  <Button className="w-full sm:px-5 mt-2 rounded sm:w-fit flex-grow sm:flex-grow-0 hover:text-black bg-gray-200 text-black hover:bg-gray-300 transition-colors duration-200"
       variant="outline"
       size="sm" onClick={closeModal}>Close</Button>
 </Modal>
