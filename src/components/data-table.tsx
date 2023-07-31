@@ -304,7 +304,7 @@ export function DataTable<TData, TValue>({
     </div>
   </div>
   <Modal
-  className="z-40 h-fit w-4/5 m-auto mt-36"
+  className="z-40 h-fit w-4/5 m-auto mt-36 focus:outline-none"
   isOpen={modalIsOpen}
   onRequestClose={closeModal}
   contentLabel="Project Details Modal"
@@ -322,7 +322,7 @@ export function DataTable<TData, TValue>({
       <p className="text-sm dark:text-gray-400  text-gray-700">{projectDetails.projects_info}</p>
     </div>
   )}
-  <Button className="w-full sm:px-5 mt-2 rounded sm:w-fit flex-grow sm:flex-grow-0 hover:text-black bg-gray-200 text-black hover:bg-gray-300 transition-colors duration-200"
+  <Button className="w-full focus:outline-none sm:px-5 mt-2 rounded sm:w-fit flex-grow sm:flex-grow-0 hover:text-black bg-gray-200 text-black hover:bg-gray-300 transition-colors duration-200"
       variant="outline"
       size="sm" onClick={closeModal}>Close</Button>
 </Modal>
