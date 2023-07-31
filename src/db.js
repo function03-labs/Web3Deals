@@ -65,6 +65,7 @@ const fundraisingInfoSchema = new mongoose.Schema({
   fundraising_name: String,
   funds_info: String,
   projects_info: String,
+  website_links: [String],
 });
 
 // Declare the "Fundraising" model using the schema

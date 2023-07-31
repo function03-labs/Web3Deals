@@ -23,6 +23,7 @@ interface ProjectDetails {
   fundraising_name: string;
   funds_info: string;
   projects_info: string;
+  website_links: string[]; 
   // Add other properties as needed
 }
 
@@ -319,7 +320,10 @@ export function DataTable<TData, TValue>({
       <h2 className="flex items-center gap-2 font-semibold text-sm mb-1">Fund's Details :</h2>
       <p className="mb-2 text-sm dark:text-gray-400 text-gray-700">{projectDetails.funds_info}</p>
       <h2 className="flex items-center gap-2 font-semibold text-sm mb-1"><svg width="18" height="18" viewBox="0 0 0.96 0.96" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M0.48 0c0.265 0 0.48 0.215 0.48 0.48s-0.215 0.48 -0.48 0.48S0 0.745 0 0.48 0.215 0 0.48 0zm0 0.06C0.248 0.06 0.06 0.248 0.06 0.48s0.188 0.42 0.42 0.42 0.42 -0.188 0.42 -0.42S0.712 0.06 0.48 0.06zm0.039 0.555v0.078h-0.078v-0.078zM0.48 0.27a0.12 0.12 0 0 1 0.03 0.236V0.57h-0.06v-0.12h0.03a0.06 0.06 0 1 0 -0.06 -0.065L0.42 0.39h-0.06a0.12 0.12 0 0 1 0.12 -0.12z"/></svg>Project's Details :</h2>
-      <p className="text-sm dark:text-gray-400  text-gray-700">{projectDetails.projects_info}</p>
+      <p className="text-sm dark:text-gray-400 flex items-center  text-gray-700">{projectDetails.projects_info} <a href={projectDetails.website_links[0]} target="_blank" rel="noopener noreferrer" className="text-sm dark:text-gray-400 text-gray-700 border rounded-full p-1">
+        <svg width="24" height="24" viewBox="0 0 0.48 0.48" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M.132.09h.093a.102.102 0 0 1 .102.102v.006A.102.102 0 0 1 .225.3H.21V.27h.015A.072.072 0 0 0 .296.198V.192A.072.072 0 0 0 .225.12H.132A.072.072 0 0 0 .06.192v.006a.072.072 0 0 0 .06.071v.03a.102.102 0 0 1-.09-.1V.192A.102.102 0 0 1 .132.09zM.36.211v-.03a.102.102 0 0 1 .09.101v.006A.102.102 0 0 1 .348.39H.255A.102.102 0 0 1 .154.288V.282A.102.102 0 0 1 .255.18H.27v.03H.255a.072.072 0 0 0-.071.072v.006A.072.072 0 0 0 .255.36h.093A.072.072 0 0 0 .42.288V.282A.072.072 0 0 0 .36.211z"/></svg>
+        </a></p>
+        
     </div>
   )}
   <Button className="w-full focus:outline-none sm:px-5 mt-2 rounded sm:w-fit flex-grow sm:flex-grow-0 hover:text-black bg-gray-200 text-black hover:bg-gray-300 transition-colors duration-200"
