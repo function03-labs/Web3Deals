@@ -12,7 +12,7 @@ function Footer() {
                 <p className="text-gray-600 mt-1 text-sm hidden md:inline-block"> An open aggregator aimed at creating an accessible and transparent <br/> platform for the latest developments in the Web3 space, focusing <br/> primarily on raises, fundings, and investments.</p>
                 <p className="text-gray-600 mt-2 text-sm whitespace-nowrap">&copy; {new Date().getFullYear()} Web3Deals.tn All rights reserved.</p>
             </div>
-            <div className="mt-4 md:mt-0 flex gap-5 md:space-x-12 tracking-wide items-start">
+            <div className="mt-4 md:mt-0 flex space-x-12 md:space-x-12 tracking-wide items-start">
                 <div>
                     <h2 className="font-semibold mb-1">About Web3Deals</h2>
                     <ul className="flex flex-col space-y-1">

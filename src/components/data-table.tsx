@@ -166,8 +166,8 @@ export function DataTable<TData, TValue>({
   
   return (
     <div className="relative">
-  <div className="flex flex-wrap items-center pb-3">
-    <div className="w-full sm:w-auto mb-2 sm:mb-0">
+  <div className="flex flex-wrap items-center pb-2">
+    <div className="w-full sm:w-auto mb-1 sm:mb-0">
       <Input
         id='myInput'
         placeholder="Filter Projects..."
@@ -305,7 +305,7 @@ export function DataTable<TData, TValue>({
     </div>
   </div>
   <Modal
-  className="z-40 h-fit w-4/5 m-auto mt-36 xl:mt-96 focus:outline-none"
+  className="z-40 relative h-fit w-4/5 m-auto mt-24 sm:mt-36 2xl:mt-96 focus:outline-none "
   isOpen={modalIsOpen}
   onRequestClose={closeModal}
   contentLabel="Project Details Modal"

@@ -216,7 +216,7 @@ function Search({theme}) {
         onChange={handleAmountChange}
         isClearable
         placeholder="Amount"
-        className="w-full sm:block hidden md:block sm:w-auto"
+        className="w-full  sm:w-auto"
         components={{
           DropdownIndicator,
         }}
