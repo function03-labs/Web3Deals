@@ -1,17 +1,14 @@
-import { useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import Button from './Button'
 
-const GoogleSignInButton = () => {
-  const searchParams = useSearchParams()
-  const callbackUrl = searchParams.get('callbackUrl')
+const GoogleSignInButton = ({isLoading}) => {
 
   return (
     <Button
       variant='solid'
       color='gray'
-      className='w-full'
-      onClick={() => signIn('google', { callbackUrl })}
+      className={`w-full ${isLoading ? 'bg-slate-400 hover:bg-slate-400 border-slate-400':''}`}
+      onClick={() => signIn('google')}
     >
       <svg
         aria-hidden='true'

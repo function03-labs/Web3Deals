@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect,useState } from 'react';
 import { useRouter } from 'next/router';
-import {signIn,signOut,useSession} from 'next-auth/react'
+import {signIn,useSession} from 'next-auth/react'
 
 
 function SunIcon() {
@@ -26,12 +26,18 @@ function MoonIcon() {
 function Header({theme, setTheme}) {
   const Router= useRouter()
   const {data: session}= useSession()
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   
   useEffect(() => {
     // Set the theme based on the value stored in localStorage
     document.documentElement.setAttribute('data-theme', localStorage.getItem('theme'));
     setTheme(localStorage.getItem('theme'));
   }, []);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
 
   // Function to toggle the theme between 'light' and 'dark'
   const toggleTheme = () => {
@@ -68,8 +74,8 @@ function Header({theme, setTheme}) {
         <div onClick={toggleTheme} className="cursor-pointer transition-all">
           {theme === 'light' ? <SunIcon/>:<MoonIcon/>}
          </div>
-         <div onClick={!session ? signIn : signOut} className='cursor-pointer inline-flex items-center justify-center text-sm font-medium transition-colors h-9 rounded-md w-9 px-0' >
-         {session ? <img width="24" loading='lazy' height="24" className='rounded-full' src={session.user.image} alt=""/>:<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 0.72 0.72"><path d="M.36.06a.3.3 0 1 0 0 .6.3.3 0 0 0 0-.6zm0 .09c.05 0 .09.04.09.09S.41.33.36.33.27.29.27.24.31.15.36.15zm0 .426A.216.216 0 0 1 .18.479C.181.419.3.387.36.387S.539.42.54.479a.216.216 0 0 1-.18.097z" fill="currentColor" /></svg>}</div>
+         <div onClick={!session ? signIn : ()=>Router.push('/dashboard')} className='cursor-pointer inline-flex items-center justify-center text-sm font-medium transition-colors h-9 rounded-md w-9 px-0' >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 0.72 0.72"><path d="M.36.06a.3.3 0 1 0 0 .6.3.3 0 0 0 0-.6zm0 .09c.05 0 .09.04.09.09S.41.33.36.33.27.29.27.24.31.15.36.15zm0 .426A.216.216 0 0 1 .18.479C.181.419.3.387.36.387S.539.42.54.479a.216.216 0 0 1-.18.097z" fill="currentColor" /></svg></div>
       </nav>  
     </header>
   );

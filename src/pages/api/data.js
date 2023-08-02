@@ -16,6 +16,7 @@ function getPastDaysTimestamp(days) {
 }
 
 
+
 // The function handles incoming HTTP requests
 export default async function handler(req, res) {
   // Check if the request method is GET
@@ -84,10 +85,13 @@ export default async function handler(req, res) {
     }
 
     if (month) {
-      const currentyear = new Date().getFullYear();
+      const pastmonthTimestamp = getPastDaysTimestamp(30);
+      const currentTimestamp = Date.now() / 1000;
+      query.funddate = { $gte: pastmonthTimestamp, $lt: currentTimestamp };
+      /*const currentyear = new Date().getFullYear();
       const startOfMonth = new Date(currentyear, month, 1).getTime() / 1000;
       const endOfMonth = new Date(currentyear, month + 1, 0, 23, 59, 59).getTime() / 1000;
-      query.funddate = { $gte: startOfMonth, $lt: endOfMonth };
+      query.funddate = { $gte: startOfMonth, $lt: endOfMonth };*/
     }
 
     if (week) {

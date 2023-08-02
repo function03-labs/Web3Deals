@@ -12,11 +12,11 @@ const Label = ({ id, children }) => {
   )
 }
 
-const TextField = ({ id, label, type = 'text', className, ...props }) => {
+const TextField = ({ id, label, type = 'text', className, isLoading, ...props }) => {
   return (
     <div className={className}>
       {label && <Label id={id}>{label}</Label>}
-      <input id={id} type={type} {...props} className={formClasses} />
+      <input id={id} type={type} {...props} className={`${formClasses} ${isLoading ? 'bg-slate-400' :'' }`} />
     </div>
   )
 }

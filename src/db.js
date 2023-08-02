@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 // MongoDB connection URI
-const uri = 'mongodb+srv://admin:web3deals@cluster-web3deals.sx22edf.mongodb.net/data?retryWrites=true&w=majority';
+const database_url= process.env.MONGODB_STRING;
 
 // A flag to track if the database is already connected
 let isConnected = false;
@@ -14,7 +14,7 @@ async function connectDatabase() {
 
   try {
     // Connect to the MongoDB using the provided URI
-    await mongoose.connect(uri, {
+    await mongoose.connect(database_url, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
