@@ -8,7 +8,7 @@ function Footer() {
         
         <div className="w-full  flex flex-col md:flex-row items-center justify-between px-2">
             <div className="text-center md:text-left">
-                <h1 onClick={() => { Router.push("/") }} className="cursor-pointer text-2xl font-bold tracking-widest">.Web3Deals</h1>
+                <h1 onClick={() => { Router.push("/?week=31") }} className="cursor-pointer text-2xl font-bold tracking-widest">.Web3Deals</h1>
                 <p className="text-gray-500 mt-1 text-sm hidden md:inline-block"> An open aggregator aimed at creating an accessible and transparent <br/> platform for the latest developments in the Web3 space, focusing <br/> primarily on raises, fundings, and investments.</p>
                 <p className="text-gray-500 mt-2 text-sm whitespace-nowrap">&copy; {new Date().getFullYear()} Web3Deals.tn All rights reserved.</p>
             </div>
