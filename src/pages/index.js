@@ -13,8 +13,7 @@ export default function Home() {
         <div className="lg:px-32 md:px-22 sm:px-12">
           <CardFeed theme={theme} />
           <DemoPage theme={theme} />
-        </div>
-       
+        </div>      
       </main>
       <Footer/>
     </div>   
