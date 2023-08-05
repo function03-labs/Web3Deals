@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
+import {useSession} from 'next-auth/react'
 
 const SettingsForm = () => {
-    const [name, setName] = React.useState("");
+    const {data:session}=useSession();
+    const [name, setName] = useState("");
+    const [isSaving, setIsSaving] = useState(false);
+    const [error, setError] = useState(null);
+    const user = session.user; // This is just a mock, replace with actual user id.
 
-    const handleSubmit = event => {
+    const handleSubmit = async event => {
         event.preventDefault();
-        console.log(name);
-        // Here you can handle what happens when form is submitted
-        // Maybe send name to server or update it in your state management library
+        setIsSaving(true);
+        setError(null);
+
+        try {
+            const response = await fetch(`/api/users/${user.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ name: name }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setIsSaving(false);
+        }
     };
 
     return (
@@ -45,14 +67,18 @@ const SettingsForm = () => {
                                     name="name"
                                     value={name}
                                     onChange={event => setName(event.target.value)}
+                                    disabled={isSaving}
                                 />
+                                {error && <p className="error">{error}</p>}
                             </div>
                         </div>
                         <div className="flex items-center p-6 pt-0">
                             <button
                                 type="submit"
-                                className="inline-flex border items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-10 py-2 px-4">
-                                <span>Save</span>
+                                className="inline-flex border items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-primary text-primary-foreground hover:bg-primary/90 h-10 py-2 px-4"
+                                disabled={isSaving}
+                            >
+                                {isSaving ? 'Saving...' : 'Save'}
                             </button>
                         </div>
                     </div>
