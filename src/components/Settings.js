@@ -11,7 +11,7 @@ const SettingsForm = () => {
     };
 
     return (
-        <div className="grid items-start gap-4 mt-10 ">
+        <div className="grid items-start gap-4 mt-5 sm:mt-10 px-4 sm:px-0">
             <div className="flex items-center justify-between px-2">
                 <div className="grid gap-1">
                     <h1 className="font-heading text-3xl md:text-4xl">Settings</h1>
@@ -22,7 +22,7 @@ const SettingsForm = () => {
             </div>
             <div className="grid gap-10">
                 <form onSubmit={handleSubmit}>
-                    <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
+                    <div className="rounded border bg-card text-card-foreground shadow-sm">
                         <div className="flex flex-col space-y-1.5 p-6">
                             <h3 className="text-lg text-[#fb2056] font-semibold leading-none tracking-tight">
                                 Your Name
@@ -39,7 +39,7 @@ const SettingsForm = () => {
                                     Name
                                 </label>
                                 <input
-                                    className="flex h-10 rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-[400px]"
+                                    className="flex h-10 rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 sm:w-[400px] "
                                     id="name"
                                     size="32"
                                     name="name"

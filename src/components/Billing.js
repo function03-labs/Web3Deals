@@ -9,7 +9,7 @@ const BillingForm = () => {
     };
 
     return (
-        <div className="grid items-start gap-4 mt-10">
+        <div className="grid items-start gap-4 mt-5 sm:mt-10 px-4 sm:px-0">
             <div className="flex items-center justify-between px-2">
                 <div className="grid gap-1">
                     <h1 className="font-heading text-3xl md:text-4xl">Billing</h1>
@@ -20,7 +20,7 @@ const BillingForm = () => {
             </div>
             <div className="grid gap-8">
                 <form onSubmit={handleSubmit}>
-                    <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
+                    <div className="rounded border bg-card text-card-foreground shadow-sm">
                         <div className="flex flex-col space-y-1.5 p-6">
                             <h3 className="text-lg font-semibold leading-none text-[#fb2056] tracking-tight">
                                 Subscription Plan
@@ -30,7 +30,7 @@ const BillingForm = () => {
                             </p>
                         </div>
                         <div className="p-6 pt-0">
-                            The free plan is limited to 3 posts. Upgrade to the PRO plan for unlimited posts.
+                            The free plan is limited. Upgrade to the PRO plan for exclusive news.
                         </div>
                         <div className="p-6 pt-0 flex flex-col items-start space-y-2 md:flex-row md:justify-between md:space-x-0">
                             <button

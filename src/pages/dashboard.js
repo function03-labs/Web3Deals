@@ -37,7 +37,7 @@ export default function Dashboard({ user }) {
   return (
     <div >
       <DashboardHeader theme={theme} setTheme={setTheme}/>
-      <div className="flex gap-4">
+      <div className="flex flex-col sm:flex-row mb-8">
         <SidebarNav />
         {router.asPath === "/dashboard" ? <ProductFeed /> : router.asPath === "/dashboard?show=billing" ? <BillingForm />: <SettingsForm /> }
       </div>

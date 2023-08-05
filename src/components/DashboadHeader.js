@@ -52,7 +52,7 @@ function DashboardHeader({ theme, setTheme }) {
   };
 
   return (
-    <header className="z-20 ease-linear flex flex-col md:flex-row justify-between items-center py-2 sm:py-3 md:py-3 md:px-[8rem] border-b border-[#F2F2F2]">
+    <header className="z-20 ease-linear flex flex-row px-8 justify-between items-center py-3 sm:py-4 md:px-[8rem] border-b border-[#F2F2F2]">
       <Link href="/?week=31">
         <button className="flex gap-2 items-center">
           <svg width="24px" height="24px" viewBox="0 0 0.72 0.72" xmlns="http://www.w3.org/2000/svg" version="1.1" transform="matrix(-1,0,0,-1,0,0)">
