@@ -8,11 +8,11 @@ const MyApp = ({ Component, pageProps }) => {
     <SessionProvider session={pageProps.session}>
     <Head>
       <title>Web3Deals</title>
-      <meta name="description" content="Find the latest deals in the web3 space." />
+      <meta name="description" content="Find the latest deals in web3." />
       <meta name="keywords" content="Deals, Cryptocurrency, Web3, Blockchain, Bargain" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta property="og:title" content="Web3Deals" />
-      <meta property="og:description" content="Find the latest deals in the web3 space." />
+      <meta property="og:description" content="Find the latest deals in web3." />
       <meta property="og:image" content="/path-to-your/image.jpg" />
       <meta property="og:url" content="https://web3deals.info" />
       <link rel="manifest" href="/manifest.json" />
