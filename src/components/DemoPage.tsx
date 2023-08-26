@@ -1,25 +1,30 @@
 import { useState, useEffect, useRef } from "react";
-import { Project, columns } from "./columns"
-import { DataTable } from "./data-table"
+import { Project, columns } from "./columns";
+import { DataTable } from "./data-table";
 import { useRouter } from "next/router";
 import { isEqual } from "lodash";
 
-async function getData(query, pageIndex = 0): Promise<{ projects: Project[], total_pages: number }> {
-  const start = pageIndex ; // adjust start to fetch two "pages" at once
+async function getData(
+  query,
+  pageIndex = 0
+): Promise<{ projects: Project[]; total_pages: number }> {
+  const start = pageIndex; // adjust start to fetch two "pages" at once
   const sortParts = query.sort ? query.sort.split(".") : [];
-  let sortField = sortParts[0] == 'amount' ? 'fundamount' : 'funddate';
-  let sortOrder = sortParts[1] || 'desc';
+  let sortField = sortParts[0] == "amount" ? "fundamount" : "funddate";
+  let sortOrder = sortParts[1] || "desc";
 
   // define a helper function to make a request with a given start index
   async function fetchPage(startIndex) {
-    let apiUrl = `/api/data?start=${startIndex+1}`;
-    if (query.cat) apiUrl += `&category=${query.cat === 'misc.' ? 'others' : query.cat}`;
+    let apiUrl = `/api/data?start=${startIndex + 1}`;
+    if (query.cat)
+      apiUrl += `&category=${query.cat === "misc." ? "others" : query.cat}`;
     if (query.amount) apiUrl += `&fundRange=${query.amount}`;
     if (query.stage) apiUrl += `&fundstagename=${query.stage}`;
     if (query.date) apiUrl += `&year=${query.date}`;
     if (query.month) apiUrl += `&month=${query.month}`;
     if (query.week) apiUrl += `&week=${query.week}`;
-    if (query.search) apiUrl += `&projectname=${encodeURIComponent(query.search)}`;
+    if (query.search)
+      apiUrl += `&projectname=${encodeURIComponent(query.search)}`;
     if (sortField) apiUrl += `&sortField=${sortField}`;
     if (sortOrder) apiUrl += `&sortOrder=${sortOrder}`;
 
@@ -29,9 +34,9 @@ async function getData(query, pageIndex = 0): Promise<{ projects: Project[], tot
 
   // fetch two "pages" of data
   const responses = await Promise.all([fetchPage(start)]);
-  
+
   // combine the project data from both responses
-  const allProjects = responses[0].data.map(project => ({
+  const allProjects = responses[0].data.map((project) => ({
     id: project.projectcode,
     amount: project.fundamount,
     project: project.projectname,
@@ -39,16 +44,20 @@ async function getData(query, pageIndex = 0): Promise<{ projects: Project[], tot
     count: project.investorcount,
     logo: project.logo,
     stage: project.fundstagename,
-    categories: project.categorylist.map(category => category.name).join(', '),
-    investors: project.investorlist.map(investor => investor.investorname).join(', ')
+    categories: project.categorylist
+      .map((category) => category.name)
+      .join(", "),
+    investors: project.investorlist
+      .map((investor) => investor.investorname)
+      .join(", "),
   }));
 
   // for total_pages, use the total count from the first response
-  const total_pages = responses[0].totalPages ;
+  const total_pages = responses[0].totalPages;
   return { projects: allProjects, total_pages };
 }
 
-export default function DemoPage({theme}) {
+export default function DemoPage({ theme }) {
   const router = useRouter();
   const [data, setData] = useState<Project[]>([]);
   const [pageIndex, setPageIndex] = useState(0); // Add state for page index
@@ -70,7 +79,7 @@ export default function DemoPage({theme}) {
   // Fetch data on page index or query change
   useEffect(() => {
     setLoading(true);
-    getData(router.query, pageIndex).then(result => {
+    getData(router.query, pageIndex).then((result) => {
       setData(result.projects);
       setPageCount(result.total_pages);
       setLoading(false);
@@ -78,59 +87,59 @@ export default function DemoPage({theme}) {
   }, [router.query, pageIndex]);
 
   return (
-
-      <div className="container mx-auto py-6">
-        {loading ? (
-
-<div role="status" className="max-w-full p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700">
-    <div className="flex items-center justify-between">
-        <div>
-            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-            <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+    <div className="container !max-w-none mx-auto py-6">
+      {loading ? (
+        <div
+          role="status"
+          className="max-w-full p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700"
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+              <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            </div>
+            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+          </div>
+          <div className="flex items-center justify-between pt-4">
+            <div>
+              <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+              <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            </div>
+            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+          </div>
+          <div className="flex items-center justify-between pt-4">
+            <div>
+              <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+              <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            </div>
+            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+          </div>
+          <div className="flex items-center justify-between pt-4">
+            <div>
+              <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+              <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            </div>
+            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+          </div>
+          <div className="flex items-center justify-between pt-4">
+            <div>
+              <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+              <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            </div>
+            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+          </div>
+          <span className="sr-only">Loading...</span>
         </div>
-        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+      ) : (
+        <DataTable
+          columns={columns}
+          data={data}
+          pageIndex={pageIndex}
+          setPageIndex={setPageIndex}
+          pageCount={pageCount}
+          theme={theme}
+        />
+      )}
     </div>
-    <div className="flex items-center justify-between pt-4">
-        <div>
-            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-            <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-        </div>
-        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
-    </div>
-    <div className="flex items-center justify-between pt-4">
-        <div>
-            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-            <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-        </div>
-        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
-    </div>
-    <div className="flex items-center justify-between pt-4">
-        <div>
-            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-            <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-        </div>
-        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
-    </div>
-    <div className="flex items-center justify-between pt-4">
-        <div>
-            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
-            <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
-        </div>
-        <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
-    </div>
-    <span className="sr-only">Loading...</span>
-</div>
-        ) : (
-          <DataTable
-            columns={columns}
-            data={data}
-            pageIndex={pageIndex}
-            setPageIndex={setPageIndex}
-            pageCount={pageCount}
-            theme={theme}
-          />
-        )}
-      </div>
-    );
-
+  );
 }

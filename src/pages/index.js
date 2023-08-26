@@ -10,7 +10,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <Header theme={theme} setTheme={setTheme} />
       <main className="relative flex-grow">
-        <div className="lg:px-32 md:px-22 sm:px-12">
+        <div className="lg:px-32 md:px-16 sm:px-6">
           <CardFeed theme={theme} />
           <DemoPage theme={theme} />
         </div>      
