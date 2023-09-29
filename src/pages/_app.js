@@ -2,7 +2,7 @@
 import "../app/globals.css";
 import Head from "next/head";
 import { SessionProvider } from "next-auth/react";
-
+import { Analytics } from "@vercel/analytics/react";
 const MyApp = ({ Component, pageProps }) => {
   return (
     <SessionProvider session={pageProps.session}>
@@ -42,6 +42,7 @@ const MyApp = ({ Component, pageProps }) => {
         />
       </Head>
       <Component {...pageProps} />
+      <Analytics />
     </SessionProvider>
   );
 };
